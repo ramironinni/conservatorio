@@ -2,10 +2,10 @@ import './App.css';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
 import NavBar from './components/NavBar/NavBar';
-import SearchBar from './components/SearchBar/SearchBar';
 import Home from './components/Home/Home';
 import NotFound from './components/NotFound/NotFound';
 import AddPerson from './components/AddPerson/AddPerson';
+import Search from './components/Search/Search';
 
 function App() {
     return (
@@ -17,8 +17,8 @@ function App() {
                         <Route exact path="/">
                             <Home />
                         </Route>
-                        <Route path="/search">
-                            <SearchBar type="Student" />
+                        <Route path="/search/:type">
+                            <Search />
                         </Route>
                         <Route path="/add">
                             <AddPerson />

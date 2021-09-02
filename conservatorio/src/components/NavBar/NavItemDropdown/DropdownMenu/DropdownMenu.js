@@ -1,10 +1,10 @@
 import DropdownItem from './DropdownItem/DropdownItem';
 
-const DropdownMenu = ({ items }) => {
+const DropdownMenu = ({ action, items }) => {
     return (
         <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
-            {items.map((item) => {
-                return <DropdownItem title={item} />;
+            {items.map((item, i) => {
+                return <DropdownItem action={action} title={item} key={i} />;
             })}
         </ul>
     );
