@@ -4,8 +4,8 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import NavBar from './components/NavBar/NavBar';
 import Home from './components/Home/Home';
 import NotFound from './components/NotFound/NotFound';
-import AddPerson from './components/AddPerson/AddPerson';
 import Search from './components/Search/Search';
+import AddUser from './components/AddUser/AddUser';
 
 function App() {
     return (
@@ -21,7 +21,7 @@ function App() {
                             <Search />
                         </Route>
                         <Route path="/add">
-                            <AddPerson />
+                            <AddUser />
                         </Route>
                         <Route path="*">
                             <NotFound />
