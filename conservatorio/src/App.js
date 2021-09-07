@@ -6,6 +6,7 @@ import Home from './components/Home/Home';
 import NotFound from './components/NotFound/NotFound';
 import Search from './components/Search/Search';
 import AddUser from './components/AddUser/AddUser';
+import UserDetail from './components/UserDetail/UserDetail';
 
 function App() {
     return (
@@ -16,6 +17,9 @@ function App() {
                     <Switch>
                         <Route exact path="/">
                             <Home />
+                        </Route>
+                        <Route path="/search/user-detail">
+                            <UserDetail />
                         </Route>
                         <Route path="/search/:type">
                             <Search />

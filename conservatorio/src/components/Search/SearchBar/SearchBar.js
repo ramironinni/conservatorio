@@ -1,6 +1,6 @@
 const SearchBar = () => {
     return (
-        <form className="d-flex">
+        <form className="d-flex m-5">
             <input
                 className="form-control me-2"
                 type="search"

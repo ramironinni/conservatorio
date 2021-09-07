@@ -4,13 +4,13 @@ import UserCard from './UserCard/UserCard';
 
 const Search = () => {
     const { data, isPending, error } = useFetch(
-        'https://randomuser.me/api/?page=1&results=5&seed=abc',
-        5,
+        'https://randomuser.me/api/?page=1&results=4&seed=abc',
+        4,
         1
     );
 
     return (
-        <div className="container my-5 search-container">
+        <div className="container search-container">
             <SearchBar />
             <div className="results-container">
                 {isPending && (
@@ -20,7 +20,7 @@ const Search = () => {
                     <div className="results-pending">Cannot fetch the data</div>
                 )}
                 {data && (
-                    <div className="results-list">
+                    <div className="row results-list">
                         {console.log(data.results)}
                         {data.results.map((user, i) => {
                             return (
