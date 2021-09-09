@@ -8,7 +8,7 @@ const SearchBar = () => {
                 aria-label="Search"
             />
             <button className="input-group-text" type="submit">
-                <span className="material-icons">search</span>
+                <i class="bi bi-search"></i>
             </button>
         </form>
     );
