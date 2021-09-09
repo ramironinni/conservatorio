@@ -1,7 +1,0 @@
-.user-card-container {
-    cursor: pointer;
-}
-
-.user-card-container:hover {
-    background-color: var(--bs-gray-200);
-}

@@ -11,7 +11,7 @@ import UserDetail from './components/UserDetail/UserDetail';
 function App() {
     return (
         <Router>
-            <div className="container-fluid bg-light px-0 App">
+            <div className="bg-light px-0 App">
                 <NavBar />
                 <div className="content">
                     <Switch>

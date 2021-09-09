@@ -7,7 +7,7 @@ const SearchBar = () => {
                 placeholder="name"
                 aria-label="Search"
             />
-            <button className="input-group-text" type="submit">
+            <button className="btn btn-primary" type="submit">
                 <i class="bi bi-search"></i>
             </button>
         </form>

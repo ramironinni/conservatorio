@@ -1,0 +1,12 @@
+// $primary: #3e76be;
+
+@import '../node_modules/bootstrap/scss/_functions';
+@import '../node_modules/bootstrap/scss/_variables';
+
+$custom-theme-colors: (
+    'semidark': #e4e4e4,
+);
+
+$theme-colors: map-merge($custom-theme-colors, $theme-colors);
+
+@import '../node_modules/bootstrap/scss/bootstrap';
