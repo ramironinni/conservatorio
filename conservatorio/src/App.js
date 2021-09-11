@@ -1,4 +1,3 @@
-import './App.css';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
 import NavBar from './components/NavBar/NavBar';
@@ -7,6 +6,8 @@ import NotFound from './components/NotFound/NotFound';
 import Search from './components/Search/Search';
 import AddUser from './components/AddUser/AddUser';
 import UserDetail from './components/UserDetail/UserDetail';
+import AddRecord from './components/AddRecord/AddRecord';
+import Footer from './components/Footer/Footer';
 
 function App() {
     return (
@@ -24,8 +25,11 @@ function App() {
                         <Route path="/search/:type">
                             <Search />
                         </Route>
-                        <Route path="/add">
+                        <Route path="/add/user">
                             <AddUser />
+                        </Route>
+                        <Route path="/add/record">
+                            <AddRecord />
                         </Route>
                         <Route path="*">
                             <NotFound />
@@ -33,6 +37,7 @@ function App() {
                     </Switch>
                 </div>
             </div>
+            <Footer />
         </Router>
     );
 }

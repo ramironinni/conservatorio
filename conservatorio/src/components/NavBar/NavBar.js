@@ -18,7 +18,11 @@ const NavBar = () => {
         <nav className="navbar navbar-expand-sm navbar-dark bg-dark">
             <div className="container-fluid">
                 <Link className="navbar-brand" to="/">
-                    <img className="navbar-logo" src={logo} alt="site logo" />
+                    <img
+                        className="navbar-logo rounded"
+                        src={logo}
+                        alt="site logo"
+                    />
                 </Link>
                 <button
                     className="navbar-toggler"
@@ -49,7 +53,7 @@ const NavBar = () => {
                         />
                         <NavItemDropdown
                             title="Add"
-                            items={items}
+                            items={['user', 'record']}
                             action="add"
                         />
                     </ul>
