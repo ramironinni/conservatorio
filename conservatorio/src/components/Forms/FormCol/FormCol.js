@@ -1,7 +1,11 @@
-import capitalizeWord from '../../../../utils/capitalizeWord';
+import capitalizeWord from '../../../utils/capitalizeWord';
 
 const FormCol = ({ size, id, children }) => {
-    const array = id.split('-').map((word) => {
+    const idToArray = id.split('');
+    const index = idToArray.lastIndexOf('_') + 1;
+    const cleanedId = idToArray.slice(index).join('');
+
+    const array = cleanedId.split('-').map((word) => {
         return capitalizeWord(word);
     });
 
@@ -13,7 +17,7 @@ const FormCol = ({ size, id, children }) => {
 
     return (
         <div className={className}>
-            <label htmlFor={`add-user__${id}`} className="form-label">
+            <label htmlFor={id} className="form-label">
                 {fieldName}
             </label>
             {children}

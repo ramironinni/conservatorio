@@ -4,10 +4,10 @@ import NavBar from './components/NavBar/NavBar';
 import Home from './components/Home/Home';
 import NotFound from './components/NotFound/NotFound';
 import Search from './components/Search/Search';
-import AddUser from './components/AddUser/AddUser';
 import UserDetail from './components/UserDetail/UserDetail';
-import AddRecord from './components/AddRecord/AddRecord';
 import Footer from './components/Footer/Footer';
+import AddRecord from './components/Add/AddRecord/AddRecord';
+import AddUser from './components/Add/AddUser/AddUser';
 
 function App() {
     return (

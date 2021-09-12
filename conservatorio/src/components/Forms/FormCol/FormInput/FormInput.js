@@ -3,7 +3,7 @@ const FormInput = ({ type, id, placeholder, className }) => {
         <input
             type={type}
             className={`form-control ${className}`}
-            id={`add-user__${id}`}
+            id={id}
             placeholder={placeholder}
             value=""
             required

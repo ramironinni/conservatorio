@@ -1,4 +1,4 @@
-import capitalizeWord from '../../../../../utils/capitalizeWord';
+import capitalizeWord from '../../../../utils/capitalizeWord';
 
 const FormCheck = ({ id, labelText, className }) => {
     const completeId = `add-user__${id}`;
