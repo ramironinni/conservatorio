@@ -2,7 +2,7 @@ import FormCol from '../../../Forms/FormCol/FormCol';
 import FormInput from '../../../Forms/FormCol/FormInput/FormInput';
 import FormSelect from '../../../Forms/FormCol/FormSelect/FormSelect';
 import FormSubmitBtn from '../../../Forms/FormSubmitBtn/FormSubmitBtn';
-import FormCheck from '../../AddUser/AddUserForm/FormCol/FormCheck/FormCheck';
+import FormCheck from '../../../Forms/FormCheck/FormCheck';
 
 const AddRecordForm = () => {
     return (

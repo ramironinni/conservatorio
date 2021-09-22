@@ -1,9 +1,10 @@
-import capitalizeWord from '../../../../utils/capitalizeWord';
 import FormCol from '../../../Forms/FormCol/FormCol';
 import FormInput from '../../../Forms/FormCol/FormInput/FormInput';
 import FormSelect from '../../../Forms/FormCol/FormSelect/FormSelect';
 import FormSubmitBtn from '../../../Forms/FormSubmitBtn/FormSubmitBtn';
-import FormCheck from './FormCol/FormCheck/FormCheck';
+import FormCheck from '../../../Forms/FormCheck/FormCheck';
+import capitalizeWord from '../../../../utils/capitalizeWord';
+import { useState } from 'react';
 
 const AddUserForm = () => {
     const roles = [
@@ -16,22 +17,63 @@ const AddUserForm = () => {
         'other',
     ];
 
+    const [firstName, setFirstName] = useState('');
+    const [lastName, setLastName] = useState('');
+    const [idNumber, setIdNumber] = useState('');
+    const [dateOfBirth, setDateOfBirth] = useState('');
+
+    const firstNameChangeHandler = (e) => {
+        setFirstName(e.target.value);
+    };
+
+    const lastNameChangeHandler = (e) => {
+        setLastName(e.target.value);
+    };
+
+    const idNumberChangeHandler = (e) => {
+        setIdNumber(e.target.value);
+    };
+
+    const dateOfBirthChangeHandler = (e) => {
+        setDateOfBirth(e.target.value);
+    };
+
     return (
         <form className="needs-validation">
             <div className="row g-3">
                 <h4>Main</h4>
 
                 <FormCol size="sm-6" id="add-user__first-name">
-                    <FormInput type="text" id="add-user__first-name" />
+                    <FormInput
+                        type="text"
+                        id="add-user__first-name"
+                        onChange={firstNameChangeHandler}
+                        value={firstName}
+                    />
                 </FormCol>
                 <FormCol size="sm-6" id="add-user__last-name">
-                    <FormInput type="text" id="add-user__last-name" />
+                    <FormInput
+                        type="text"
+                        id="add-user__last-name"
+                        onChange={lastNameChangeHandler}
+                        value={lastName}
+                    />
                 </FormCol>
                 <FormCol size="sm-6" id="add-user__id-number">
-                    <FormInput type="text" id="add-user__id-number" />
+                    <FormInput
+                        type="text"
+                        id="add-user__id-number"
+                        onChange={dateOfBirthChangeHandler}
+                        value={dateOfBirth}
+                    />
                 </FormCol>
                 <FormCol size="sm-6" id="add-user__date-of-birth">
-                    <FormInput type="date" id="add-user__date-of-birth" />
+                    <FormInput
+                        type="date"
+                        id="add-user__date-of-birth"
+                        onChange={idNumberChangeHandler}
+                        value={idNumber}
+                    />
                 </FormCol>
                 <FormCol size="sm-6" id="add-user__gender">
                     <FormSelect
