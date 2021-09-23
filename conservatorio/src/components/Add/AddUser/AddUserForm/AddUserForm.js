@@ -1,6 +1,5 @@
-import FormCol from '../../../Forms/FormCol/FormCol';
-import FormInput from '../../../Forms/FormCol/FormInput/FormInput';
-import FormSelect from '../../../Forms/FormCol/FormSelect/FormSelect';
+import FormInput from '../../../Forms/FormInput/FormInput';
+import FormSelect from '../../../Forms/FormSelect/FormSelect';
 import FormSubmitBtn from '../../../Forms/FormSubmitBtn/FormSubmitBtn';
 import FormCheck from '../../../Forms/FormCheck/FormCheck';
 import capitalizeWord from '../../../../utils/capitalizeWord';
@@ -43,99 +42,95 @@ const AddUserForm = () => {
             <div className="row g-3">
                 <h4>Main</h4>
 
-                <FormCol size="sm-6" id="add-user__first-name">
-                    <FormInput
-                        type="text"
-                        id="add-user__first-name"
-                        onChange={firstNameChangeHandler}
-                        value={firstName}
-                    />
-                </FormCol>
-                <FormCol size="sm-6" id="add-user__last-name">
-                    <FormInput
-                        type="text"
-                        id="add-user__last-name"
-                        onChange={lastNameChangeHandler}
-                        value={lastName}
-                    />
-                </FormCol>
-                <FormCol size="sm-6" id="add-user__id-number">
-                    <FormInput
-                        type="text"
-                        id="add-user__id-number"
-                        onChange={dateOfBirthChangeHandler}
-                        value={dateOfBirth}
-                    />
-                </FormCol>
-                <FormCol size="sm-6" id="add-user__date-of-birth">
-                    <FormInput
-                        type="date"
-                        id="add-user__date-of-birth"
-                        onChange={idNumberChangeHandler}
-                        value={idNumber}
-                    />
-                </FormCol>
-                <FormCol size="sm-6" id="add-user__gender">
-                    <FormSelect
-                        options={['female', 'male', 'non-binary', 'other']}
-                        id="add-user__gender"
-                    />
-                </FormCol>
-                <FormCol size="sm-6" id="add-user__nationality">
-                    <FormSelect
-                        options={['Argentinian', '...', '...', '...']}
-                        id="add-user__nationality"
-                    />
-                </FormCol>
+                <FormInput
+                    size="sm-6"
+                    id="add-user__first-name"
+                    type="text"
+                    onChange={firstNameChangeHandler}
+                    value={firstName}
+                />
+                <FormInput
+                    size="sm-6"
+                    id="add-user__last-name"
+                    type="text"
+                    onChange={lastNameChangeHandler}
+                    value={lastName}
+                />
+                <FormInput
+                    size="sm-6"
+                    id="add-user__id-number"
+                    type="text"
+                    onChange={dateOfBirthChangeHandler}
+                    value={dateOfBirth}
+                />
+                <FormInput
+                    size="sm-6"
+                    id="add-user__date-of-birth"
+                    type="date"
+                    onChange={idNumberChangeHandler}
+                    value={idNumber}
+                />
+                <FormSelect
+                    size="sm-6"
+                    options={['female', 'male', 'non-binary', 'other']}
+                    id="add-user__gender"
+                />
+                <FormSelect
+                    size="sm-6"
+                    options={['Argentinian', '...', '...', '...']}
+                    id="add-user__nationality"
+                />
 
                 <h4 className="mt-5">Address</h4>
 
-                <FormCol size="md-12" id="add-user__street-name">
-                    <FormInput type="text" id="add-user__street-name" />
-                </FormCol>
-                <FormCol size="md-4" id="add-user__house-number">
-                    <FormInput type="number" id="add-user__house-number" />
-                </FormCol>
-                <FormCol size="md-4" id="add-user__floor">
-                    <FormInput type="text" id="add-user__floor" />
-                </FormCol>
-                <FormCol size="md-4" id="add-user__apartment">
-                    <FormInput type="text" id="add-user__apartment" />
-                </FormCol>
-                <FormCol size="md-6" id="add-user__city">
-                    <FormInput type="text" id="add-user__city" />
-                </FormCol>
-                <FormCol size="md-6" id="add-user__state">
-                    <FormSelect
-                        options={['Buenos Aires', '...', '...', '...']}
-                        id="add-user__state"
-                    />
-                </FormCol>
+                <FormInput
+                    size="md-12"
+                    id="add-user__street-name"
+                    type="text"
+                />
+                <FormInput
+                    size="md-4"
+                    id="add-user__house-number"
+                    type="number"
+                />
+                <FormInput size="md-4" id="add-user__floor" type="text" />
+                <FormInput size="md-4" id="add-user__apartment" type="text" />
+                <FormInput size="md-6" id="add-user__city" type="text" />
+                <FormSelect
+                    size="md-6"
+                    options={['Buenos Aires', '...', '...', '...']}
+                    id="add-user__state"
+                />
 
                 <h4 className="mt-5">Contact</h4>
 
-                <FormCol size="md-12" id="add-user__email">
-                    <FormInput type="email" id="add-user__email" />
-                </FormCol>
-                <FormCol size="md-3" id="add-user__phone-1-code-area">
-                    <FormInput type="email" id="add-user__phone-1-code-area" />
-                </FormCol>
-                <FormCol size="md-9" id="add-user__phone-1-number">
-                    <FormInput type="number" id="add-user__phone-1-number" />
-                </FormCol>
-                <FormCol size="md-3" id="add-user__phone-2-code-area">
-                    <FormInput type="email" id="add-user__phone-2-code-area" />
-                </FormCol>
-                <FormCol size="md-9" id="add-user__phone-2-number">
-                    <FormInput type="number" id="add-user__phone-2-number" />
-                </FormCol>
-                <FormCol size="md-12" id="add-user__profile-photo">
-                    <FormInput
-                        type="file"
-                        className="form-control"
-                        id="add-user__profile-photo"
-                    />
-                </FormCol>
+                <FormInput size="md-12" id="add-user__email" type="email" />
+                <FormInput
+                    size="md-3"
+                    id="add-user__phone-1-code-area"
+                    type="email"
+                />
+                <FormInput
+                    size="md-9"
+                    id="add-user__phone-1-number"
+                    type="number"
+                />
+                <FormInput
+                    size="md-3"
+                    id="add-user__phone-2-code-area"
+                    type="email"
+                />
+                <FormInput
+                    size="md-9"
+                    id="add-user__phone-2-number"
+                    type="number"
+                />
+                <FormInput
+                    size="md-12"
+                    id="add-user__profile-photo"
+                    type="file"
+                    className="form-control"
+                />
             </div>
 
             <hr className="my-4" />

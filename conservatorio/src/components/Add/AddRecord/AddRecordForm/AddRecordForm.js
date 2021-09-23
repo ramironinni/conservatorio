@@ -1,6 +1,5 @@
-import FormCol from '../../../Forms/FormCol/FormCol';
-import FormInput from '../../../Forms/FormCol/FormInput/FormInput';
-import FormSelect from '../../../Forms/FormCol/FormSelect/FormSelect';
+import FormInput from '../../../Forms/FormInput/FormInput';
+import FormSelect from '../../../Forms/FormSelect/FormSelect';
 import FormSubmitBtn from '../../../Forms/FormSubmitBtn/FormSubmitBtn';
 import FormCheck from '../../../Forms/FormCheck/FormCheck';
 
@@ -10,56 +9,52 @@ const AddRecordForm = () => {
             <div className="row g-3">
                 <h4>Main</h4>
 
-                <FormCol size="md-6" id="add-record__book-name">
-                    <FormSelect
-                        options={['B4', '...', '...', '...']}
-                        id="add-record__book-name"
-                    />
-                </FormCol>
+                <FormSelect
+                    size="md-6"
+                    options={['B4', '...', '...', '...']}
+                    id="add-record__book-name"
+                />
 
-                <FormCol size="sm-6" id="add-record__record-number">
-                    <FormInput type="text" id="add-record__record-number" />
-                </FormCol>
+                <FormInput
+                    size="sm-6"
+                    type="text"
+                    id="add-record__record-number"
+                />
 
-                <FormCol size="md-6" id="add-record__student-condition">
-                    <FormSelect
-                        options={[
-                            'regular',
-                            'independent studies student',
-                            'course equivalency',
-                            'other',
-                        ]}
-                        id="add-record__student-condition"
-                    />
-                </FormCol>
+                <FormSelect
+                    size="md-6"
+                    options={[
+                        'regular',
+                        'independent studies student',
+                        'course equivalency',
+                        'other',
+                    ]}
+                    id="add-record__student-condition"
+                />
 
-                <FormCol size="sm-6" id="add-record__date">
-                    <FormInput type="date" id="add-record__date" />
-                </FormCol>
+                <FormInput size="sm-6" type="date" id="add-record__date" />
 
-                <FormCol size="md-6" id="add-record__course-name">
-                    <FormSelect
-                        options={[
-                            'Prof. en Música Orientación Instrumento',
-                            'Prof. en Música Orientación Educación Musical',
-                            'Tecnicatura en Capacitación Instrumental',
-                            'Formación Básica para Jóvenes y Adultos',
-                            'Formación Básica para Niños y Pre-adolescentes',
-                        ]}
-                        id="add-record__course-name"
-                    />
-                </FormCol>
+                <FormSelect
+                    size="md-6"
+                    options={[
+                        'Prof. en Música Orientación Instrumento',
+                        'Prof. en Música Orientación Educación Musical',
+                        'Tecnicatura en Capacitación Instrumental',
+                        'Formación Básica para Jóvenes y Adultos',
+                        'Formación Básica para Niños y Pre-adolescentes',
+                    ]}
+                    id="add-record__course-name"
+                />
 
-                <FormCol size="md-6" id="add-record__subject-name">
-                    <FormSelect
-                        options={[
-                            'Práctica Docente I',
-                            'Didáctica',
-                            'Historia de la Música III',
-                        ]}
-                        id="add-record__subject-name"
-                    />
-                </FormCol>
+                <FormSelect
+                    size="md-6"
+                    options={[
+                        'Práctica Docente I',
+                        'Didáctica',
+                        'Historia de la Música III',
+                    ]}
+                    id="add-record__subject-name"
+                />
             </div>
 
             <hr className="my-4" />
