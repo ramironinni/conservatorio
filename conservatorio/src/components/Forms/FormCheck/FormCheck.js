@@ -1,16 +1,12 @@
-import capitalizeWord from '../../../utils/capitalizeWord';
+import getFieldNameFromId from '../../../utils/getFieldNameFromId';
 
-const FormCheck = ({ id, labelText, className }) => {
-    const completeId = `add-user__${id}`;
+const FormCheck = ({ id }) => {
+    const fieldName = getFieldNameFromId(id);
     return (
         <div className="form-check">
-            <input
-                type="checkbox"
-                className="form-check-input"
-                id={completeId}
-            />
-            <label className="form-check-label" htmlFor={completeId}>
-                {capitalizeWord(labelText)}
+            <input type="checkbox" className="form-check-input" id={id} />
+            <label className="form-check-label" htmlFor={id}>
+                {fieldName}
             </label>
         </div>
     );

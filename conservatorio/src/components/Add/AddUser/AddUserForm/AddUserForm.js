@@ -138,14 +138,8 @@ const AddUserForm = () => {
 
             <div>
                 {roles.map((role, key) => {
-                    const id = 'is'.concat(capitalizeWord(role));
-                    return (
-                        <FormCheck
-                            key={key}
-                            id={id}
-                            labelText={role.toLowerCase()}
-                        />
-                    );
+                    const id = 'add-user__'.concat(role);
+                    return <FormCheck key={key} id={id} />;
                 })}
             </div>
             <FormSubmitBtn element="user" />

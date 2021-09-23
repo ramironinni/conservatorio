@@ -59,7 +59,7 @@ const AddRecordForm = () => {
 
             <hr className="my-4" />
             <h4>Notes</h4>
-            <FormCheck id="add-record__subject-name" labelText="It's anulled" />
+            <FormCheck id="add-record__anulled" />
 
             <FormSubmitBtn element="record" />
         </form>
