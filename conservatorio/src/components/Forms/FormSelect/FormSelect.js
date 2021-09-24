@@ -1,6 +1,7 @@
+import capitalizeWord from '../../../utils/capitalizeWord';
 import getFieldNameFromId from '../../../utils/getFieldNameFromId';
 
-const FormSelect = ({ size, id, options }) => {
+const FormSelect = ({ size, id, options, value, onChange, required }) => {
     const fieldName = getFieldNameFromId(id);
 
     const className = `col-${size}`;
@@ -10,10 +11,20 @@ const FormSelect = ({ size, id, options }) => {
             <label htmlFor={id} className="form-label">
                 {fieldName}
             </label>
-            <select className="form-select" id={`add-user__${id}`} required>
+            <select
+                className="form-select"
+                id={`add-user__${id}`}
+                value={value}
+                onChange={onChange}
+                required={required}
+            >
                 <option value="">Choose...</option>
                 {options.map((option, key) => {
-                    return <option key={key}>{option}</option>;
+                    return (
+                        <option value={option} key={key}>
+                            {capitalizeWord(option)}
+                        </option>
+                    );
                 })}
             </select>
             <div className="invalid-feedback">

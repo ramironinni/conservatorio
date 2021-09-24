@@ -1,6 +1,6 @@
 import getFieldNameFromId from '../../../utils/getFieldNameFromId';
 
-const FormInput = ({ size, id, type, value, onChange }) => {
+const FormInput = ({ size, id, type, value, onChange, required }) => {
     const fieldName = getFieldNameFromId(id);
     const className = `col-${size}`;
 
@@ -15,7 +15,7 @@ const FormInput = ({ size, id, type, value, onChange }) => {
                 id={id}
                 value={value}
                 onChange={onChange}
-                required
+                required={required}
             />
             <div className="invalid-feedback">
                 Valid {fieldName} is required.
