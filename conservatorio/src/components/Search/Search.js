@@ -17,12 +17,19 @@ const Search = () => {
     };
 
     const getFilterdUsers = () => {
+        let emptySearch = [];
+
+        if (query === '') {
+            return emptySearch;
+        }
+
         const filteredUsers = dummyDB.results.filter((user) => {
             const firstNameFound = user.name.first.includes(query);
             const lastNameFound = user.name.last.includes(query);
             const cityFound = user.location.city.includes(query);
             return firstNameFound || lastNameFound || cityFound;
         });
+
         return filteredUsers;
     };
 
