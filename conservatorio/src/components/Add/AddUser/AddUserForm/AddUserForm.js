@@ -5,7 +5,7 @@ import FormCheck from '../../../Forms/FormCheck/FormCheck';
 import { useState } from 'react';
 import roles from '../../../../utils/roles';
 
-const AddUserForm = () => {
+const AddUserForm = ({ onGetNewUser }) => {
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
     const [idNumber, setIdNumber] = useState('');
@@ -139,7 +139,7 @@ const AddUserForm = () => {
             assignedRoles,
         };
 
-        console.log(newUser);
+        onGetNewUser(newUser);
 
         setFirstName('');
         setLastName('');
