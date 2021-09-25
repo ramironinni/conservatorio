@@ -16,7 +16,7 @@ const Search = () => {
         setQuery(query);
     };
 
-    const getFilterdUsers = () => {
+    const getFilteredUsers = () => {
         let emptySearch = [];
 
         if (query === '') {
@@ -33,7 +33,7 @@ const Search = () => {
         return filteredUsers;
     };
 
-    const filteredUsers = getFilterdUsers();
+    const filteredUsers = getFilteredUsers();
 
     return (
         <div className="container search-container">
