@@ -1,7 +1,7 @@
 import SearchBar from './SearchBar/SearchBar';
 import useFetch from '../../utils/useFetch';
 import UserCard from './UserCard/UserCard';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { dummyDB } from '../../utils/dummy-db';
 
 const Search = () => {
@@ -16,24 +16,26 @@ const Search = () => {
         setQuery(query);
     };
 
-    const getFilteredUsers = () => {
-        let emptySearch = [];
+    const [filteredUsers, setFilteredUsers] = useState([]);
+
+    useEffect(() => {
+        const updateFilteredUsers = () => {
+            const newFilteredUsers = dummyDB.results.filter((user) => {
+                const firstNameFound = user.name.first.includes(query);
+                const lastNameFound = user.name.last.includes(query);
+                const cityFound = user.location.city.includes(query);
+                return firstNameFound || lastNameFound || cityFound;
+            });
+
+            setFilteredUsers(newFilteredUsers);
+        };
 
         if (query === '') {
-            return emptySearch;
+            setFilteredUsers([]);
+        } else {
+            updateFilteredUsers();
         }
-
-        const filteredUsers = dummyDB.results.filter((user) => {
-            const firstNameFound = user.name.first.includes(query);
-            const lastNameFound = user.name.last.includes(query);
-            const cityFound = user.location.city.includes(query);
-            return firstNameFound || lastNameFound || cityFound;
-        });
-
-        return filteredUsers;
-    };
-
-    const filteredUsers = getFilteredUsers();
+    }, [query]);
 
     return (
         <div className="container search-container">
@@ -48,16 +50,17 @@ const Search = () => {
 
                 {/* {data && ( */}
                 <div className="row results-list">
-                    {filteredUsers.map((user, i) => {
-                        return (
-                            <UserCard
-                                name={user.name.first}
-                                last={user.name.last}
-                                img={user.picture.thumbnail}
-                                key={i}
-                            />
-                        );
-                    })}
+                    {filteredUsers &&
+                        filteredUsers.map((user, i) => {
+                            return (
+                                <UserCard
+                                    name={user.name.first}
+                                    last={user.name.last}
+                                    img={user.picture.thumbnail}
+                                    key={i}
+                                />
+                            );
+                        })}
                 </div>
                 {/* )} */}
             </div>
