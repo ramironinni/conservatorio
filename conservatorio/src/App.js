@@ -12,9 +12,9 @@ import AddUser from './components/Add/AddUser/AddUser';
 function App() {
     return (
         <Router>
-            <div className="bg-light px-0 App">
+            <div className="App container-fluid bg-light px-0 d-flex flex-column min-vh-100">
                 <NavBar />
-                <div className="content">
+                <div className="content flex-grow-1">
                     <Switch>
                         <Route exact path="/">
                             <Home />
@@ -36,8 +36,8 @@ function App() {
                         </Route>
                     </Switch>
                 </div>
+                <Footer />
             </div>
-            <Footer />
         </Router>
     );
 }
