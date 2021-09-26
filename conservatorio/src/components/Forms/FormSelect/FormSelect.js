@@ -13,7 +13,7 @@ const FormSelect = ({ size, id, options, value, onChange, required }) => {
             </label>
             <select
                 className="form-select"
-                id={`add-user__${id}`}
+                id={id}
                 value={value}
                 onChange={onChange}
                 required={required}

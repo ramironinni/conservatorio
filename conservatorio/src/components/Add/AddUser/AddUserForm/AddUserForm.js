@@ -320,10 +320,9 @@ const AddUserForm = ({ onGetNewUser }) => {
                 {roles.map((role, i) => {
                     return (
                         <FormCheck
-                            idPrefix="add-user__"
+                            id={`add-user__`.concat(role.name)}
                             key={i}
                             checked={selectedRoles[i]}
-                            label={role.name}
                             onChange={() => {
                                 assignedRolesChangeHandler(i);
                             }}

@@ -90,6 +90,7 @@ const AddRecordForm = () => {
                 />
 
                 <FormSelect
+                    size="12"
                     options={[
                         'regular',
                         'independent studies student',
@@ -103,6 +104,7 @@ const AddRecordForm = () => {
                 />
 
                 <FormSelect
+                    size="12"
                     options={[
                         'Prof. en Música Orientación Instrumento',
                         'Prof. en Música Orientación Educación Musical',
@@ -117,6 +119,7 @@ const AddRecordForm = () => {
                 />
 
                 <FormSelect
+                    size="12"
                     options={[
                         'Práctica Docente I',
                         'Didáctica',
@@ -132,10 +135,9 @@ const AddRecordForm = () => {
             <hr className="my-4" />
             <h4>Notes</h4>
             <FormCheck
-                idPrefix="add-record__"
+                id="add-record__anulled"
                 checked={isAnulled}
                 onChange={isAnulledChangeHandler}
-                label="anulled"
             />
 
             <FormSubmitBtn element="record" />

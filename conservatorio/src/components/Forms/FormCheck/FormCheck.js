@@ -1,20 +1,20 @@
-import capitalizeWord from '../../../utils/capitalizeWord';
+import getFieldNameFromId from '../../../utils/getFieldNameFromId';
 
-const FormCheck = ({ idPrefix, checked, onChange, label }) => {
-    const id = idPrefix.concat(label);
+const FormCheck = ({ id, checked, onChange }) => {
+    const fieldName = getFieldNameFromId(id);
     return (
         <div className="form-check">
             <input
                 type="checkbox"
                 className="form-check-input"
                 id={id}
-                name={label}
-                value={label}
+                name={fieldName}
+                value={fieldName}
                 checked={checked}
                 onChange={onChange}
             />
             <label className="form-check-label" htmlFor={id}>
-                {capitalizeWord(label)}
+                {fieldName}
             </label>
         </div>
     );
