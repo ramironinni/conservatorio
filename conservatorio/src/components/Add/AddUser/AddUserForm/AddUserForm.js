@@ -323,7 +323,7 @@ const AddUserForm = ({ onGetNewUser }) => {
                             idPrefix="add-user__"
                             key={i}
                             checked={selectedRoles[i]}
-                            role={role.name}
+                            label={role.name}
                             onChange={() => {
                                 assignedRolesChangeHandler(i);
                             }}

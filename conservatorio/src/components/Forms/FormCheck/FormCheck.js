@@ -1,20 +1,20 @@
 import capitalizeWord from '../../../utils/capitalizeWord';
 
-const FormCheck = ({ idPrefix, checked, onChange, role }) => {
-    const id = idPrefix.concat(role);
+const FormCheck = ({ idPrefix, checked, onChange, label }) => {
+    const id = idPrefix.concat(label);
     return (
         <div className="form-check">
             <input
                 type="checkbox"
                 className="form-check-input"
                 id={id}
-                name={role}
-                value={role}
+                name={label}
+                value={label}
                 checked={checked}
                 onChange={onChange}
             />
             <label className="form-check-label" htmlFor={id}>
-                {capitalizeWord(role)}
+                {capitalizeWord(label)}
             </label>
         </div>
     );
