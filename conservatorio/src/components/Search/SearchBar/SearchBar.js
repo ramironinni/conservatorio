@@ -13,7 +13,7 @@ const SearchBar = ({ query, onQueryChange }) => {
                 className="form-control me-2"
                 type="search"
                 name="query"
-                placeholder="name"
+                placeholder="first name, last name or city"
                 aria-label="Search"
                 value={query}
                 onChange={queryChangeHandler}
