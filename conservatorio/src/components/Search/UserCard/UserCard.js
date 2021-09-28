@@ -1,10 +1,13 @@
 import { Link } from 'react-router-dom';
 
-const UserCard = ({ name, last, img }) => {
+const UserCard = ({ user, name, last, img }) => {
     return (
         <div className="col-lg-6">
             <Link
-                to="/search/user-detail"
+                to={{
+                    pathname: '/search/user-detail',
+                    state: { from: 'search', user },
+                }}
                 className="btn btn-semidark d-flex align-items-center m-3 p-3 rounded-3  border-start border-5 user-card-container"
             >
                 <div className="user-card-img-container">

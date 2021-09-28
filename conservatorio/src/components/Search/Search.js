@@ -68,6 +68,7 @@ const Search = () => {
                                     name={user.name.first}
                                     last={user.name.last}
                                     img={user.picture.thumbnail}
+                                    user={user}
                                     key={i}
                                 />
                             );
