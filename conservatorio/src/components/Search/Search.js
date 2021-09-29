@@ -1,9 +1,10 @@
 import SearchBar from './SearchBar/SearchBar';
 import useFetch from '../../utils/useFetch';
-import UserCard from './UserCard/UserCard';
 import { useEffect, useState } from 'react';
 import { dummyDB } from '../../utils/dummy-db';
-import NoResults from './NoResults/NoResults';
+import ResultsList from './ResultsList/ResultsList';
+import Pending from './Pending/Pending';
+import ErrorFetchingData from './ErrorFetchingData/ErrorFetchingData';
 
 const Search = () => {
     const { data, isPending, error } = useFetch(
@@ -52,31 +53,13 @@ const Search = () => {
         <div className="container search-container">
             <SearchBar query={query} onQueryChange={queryChangeHandler} />
             <div className="results-container">
-                {isPending && (
-                    <div className="results-pending">Loading ...</div>
-                )}
-                {error && (
-                    <div className="results-pending">Cannot fetch the data</div>
-                )}
-
+                {isPending && <Pending />}
+                {error && <ErrorFetchingData />}
                 {/* {data && ( */}
-                <div className="row results-list">
-                    {filteredUsers && !isNotFound ? (
-                        filteredUsers.map((user, i) => {
-                            return (
-                                <UserCard
-                                    name={user.name.first}
-                                    last={user.name.last}
-                                    img={user.picture.thumbnail}
-                                    user={user}
-                                    key={i}
-                                />
-                            );
-                        })
-                    ) : (
-                        <NoResults />
-                    )}
-                </div>
+                <ResultsList
+                    filteredUsers={filteredUsers}
+                    isNotFound={isNotFound}
+                />
                 {/* )} */}
             </div>
         </div>
