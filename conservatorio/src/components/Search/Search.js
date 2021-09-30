@@ -14,7 +14,6 @@ const Search = () => {
     );
 
     const [query, setQuery] = useState('');
-    const [isNotFound, setIsNotFound] = useState(false);
 
     const queryChangeHandler = (query) => {
         setQuery(query.toLowerCase());
@@ -38,13 +37,9 @@ const Search = () => {
             });
 
             setFilteredUsers(newFilteredUsers);
-
-            setIsNotFound(newFilteredUsers.length === 0 ? true : false);
         };
 
-        if (query === '') {
-            setFilteredUsers([]);
-        } else {
+        if (query !== '') {
             updateFilteredUsers();
         }
     }, [query]);
@@ -56,10 +51,7 @@ const Search = () => {
                 {isPending && <Pending />}
                 {error && <ErrorFetchingData />}
                 {/* {data && ( */}
-                <ResultsList
-                    filteredUsers={filteredUsers}
-                    isNotFound={isNotFound}
-                />
+                <ResultsList filteredUsers={filteredUsers} query={query} />
                 {/* )} */}
             </div>
         </div>
