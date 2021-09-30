@@ -23,6 +23,10 @@ const Search = () => {
 
     useEffect(() => {
         const updateFilteredUsers = () => {
+            if (query === '') {
+                return setFilteredUsers([]);
+            }
+
             const newFilteredUsers = dummyDB.results.filter((user) => {
                 const checkedFields = [
                     user.name.first.toLowerCase(),
@@ -38,9 +42,7 @@ const Search = () => {
             setFilteredUsers(newFilteredUsers);
         };
 
-        if (query !== '') {
-            updateFilteredUsers();
-        }
+        updateFilteredUsers();
     }, [query]);
 
     return (
