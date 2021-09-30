@@ -163,7 +163,7 @@ const AddUserForm = ({ onGetNewUser }) => {
     };
 
     return (
-        <form className="needs-validation" onSubmit={submitHandler}>
+        <form className="needs-validation" onSubmit={submitHandler} noValidate>
             <div className="row g-3">
                 <h4>Main</h4>
 

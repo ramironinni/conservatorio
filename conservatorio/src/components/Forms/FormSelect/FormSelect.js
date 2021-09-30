@@ -4,10 +4,10 @@ import getFieldNameFromId from '../../../utils/getFieldNameFromId';
 const FormSelect = ({ size, id, options, value, onChange, required }) => {
     const fieldName = getFieldNameFromId(id);
 
-    const className = `col-${size}`;
+    const sizeClass = `col-${size}`;
 
     return (
-        <div className={className}>
+        <div className={sizeClass}>
             <label htmlFor={id} className="form-label">
                 {fieldName}
             </label>
