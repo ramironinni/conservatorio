@@ -24,16 +24,15 @@ const Search = () => {
     useEffect(() => {
         const updateFilteredUsers = () => {
             const newFilteredUsers = dummyDB.results.filter((user) => {
-                const firstNameFound = user.name.first
-                    .toLowerCase()
-                    .includes(query);
-                const lastNameFound = user.name.last
-                    .toLowerCase()
-                    .includes(query);
-                const cityFound = user.location.city
-                    .toLowerCase()
-                    .includes(query);
-                return firstNameFound || lastNameFound || cityFound;
+                const checkedFields = [
+                    user.name.first.toLowerCase(),
+                    user.name.last.toLowerCase(),
+                    user.location.city.toLowerCase(),
+                ].map((field) => field.includes(query));
+
+                const foundUser = checkedFields.some((field) => field);
+
+                return foundUser;
             });
 
             setFilteredUsers(newFilteredUsers);
