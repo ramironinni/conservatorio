@@ -2,10 +2,12 @@ const express = require('express');
 const usersRouter = require('./routes/users');
 const app = express();
 const mongoose = require('mongoose');
+const dotenv = require('dotenv');
+
+dotenv.config();
 
 // Connect to MongoDB
-const dbURI =
-    'mongodb+srv://conseradmin:test1234@cluster0.m3iwz.mongodb.net/conservatorioDB?retryWrites=true&w=majority';
+const dbURI = `mongodb+srv://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@cluster0.m3iwz.mongodb.net/conservatorioDB?retryWrites=true&w=majority`;
 mongoose
     .connect(dbURI)
     .then((result) => {
