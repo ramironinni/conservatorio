@@ -19,14 +19,17 @@ const usersController = {
         }
     },
     create: async (req, res) => {
-        // const user = new User({ firstName: 'Ann', lastName: 'Estelle' });
-        // try {
-        //     const userCreated = await user.save();
-        //     res.send(userCreated);
-        // } catch (error) {
-        //     console.log(err);
-        // }
-        console.log(req.body);
+        const user = new User({
+            firstName: req.body.firstName,
+            lastName: req.body.lastName,
+        });
+        try {
+            const userCreated = await user.save();
+            console.log(req.body);
+            res.send(userCreated);
+        } catch (error) {
+            console.log(err);
+        }
     },
     delete: (req, res) => {},
     update: (req, res) => {},
