@@ -18,15 +18,18 @@ const usersController = {
             console.log(error);
         }
     },
-    add: async (req, res) => {
-        const user = new User({ firstName: 'Ann', lastName: 'Estelle' });
-        try {
-            const userAdded = await user.save();
-            res.send(userAdded);
-        } catch (error) {
-            console.log(err);
-        }
+    create: async (req, res) => {
+        // const user = new User({ firstName: 'Ann', lastName: 'Estelle' });
+        // try {
+        //     const userCreated = await user.save();
+        //     res.send(userCreated);
+        // } catch (error) {
+        //     console.log(err);
+        // }
+        console.log(req.body);
     },
+    delete: (req, res) => {},
+    update: (req, res) => {},
 };
 
 module.exports = usersController;

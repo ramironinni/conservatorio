@@ -3,7 +3,9 @@ const usersRouter = require('./routes/users');
 const app = express();
 const mongoose = require('mongoose');
 const dotenv = require('dotenv');
+const bp = require('body-parser');
 
+// config env
 dotenv.config();
 
 // Connect to MongoDB
@@ -16,6 +18,9 @@ mongoose
     .catch((err) => {
         console.log(err);
     });
+
+app.use(bp.json());
+app.use(bp.urlencoded({ extended: true }));
 
 // CORS Headers => Required for cross-origin/ cross-server communication
 app.use((req, res, next) => {
