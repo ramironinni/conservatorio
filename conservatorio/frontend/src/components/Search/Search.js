@@ -7,6 +7,20 @@ import Pending from './Pending/Pending';
 import ErrorFetchingData from './ErrorFetchingData/ErrorFetchingData';
 
 const Search = () => {
+    // const [loadedUsers, setLoadedUsers] = useState();
+
+    // useEffect(() => {
+    //     const fetchUsers = async () => {
+    //         const response = await fetch('http://localhost:5000/users');
+
+    //         const responseData = await response.json();
+
+    //         setLoadedUsers(responseData);
+    //     };
+
+    //     fetchUsers().then(console.log(loadedUsers));
+    // }, []);
+
     const { data, isPending, error } = useFetch(
         'https://randomuser.me/api/?page=1&results=6&seed=abc',
         6,
