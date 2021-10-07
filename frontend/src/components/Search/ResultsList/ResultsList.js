@@ -10,9 +10,9 @@ const ResultsList = ({ filteredUsers, query }) => {
         results = filteredUsers.map((user, i) => {
             return (
                 <UserCard
-                    name={user.name.first}
-                    last={user.name.last}
-                    img={user.picture.thumbnail}
+                    name={user.firstName}
+                    last={user.lastName}
+                    // img={user.picture.thumbnail}
                     user={user}
                     key={i}
                 />

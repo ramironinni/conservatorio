@@ -7,25 +7,11 @@ import Pending from './Pending/Pending';
 import ErrorFetchingData from './ErrorFetchingData/ErrorFetchingData';
 
 const Search = () => {
-    // const [loadedUsers, setLoadedUsers] = useState();
-
-    // useEffect(() => {
-    //     const fetchUsers = async () => {
-    //         const response = await fetch('http://localhost:5000/users');
-
-    //         const responseData = await response.json();
-
-    //         setLoadedUsers(responseData);
-    //     };
-
-    //     fetchUsers().then(console.log(loadedUsers));
-    // }, []);
-
-    const { data, isPending, error } = useFetch(
-        'https://randomuser.me/api/?page=1&results=6&seed=abc',
-        6,
-        1
-    );
+    const {
+        data: usersList,
+        isPending,
+        error,
+    } = useFetch('http://localhost:5000/users');
 
     const [query, setQuery] = useState('');
 
@@ -41,11 +27,11 @@ const Search = () => {
                 return setFilteredUsers([]);
             }
 
-            const newFilteredUsers = dummyDB.results.filter((user) => {
+            const newFilteredUsers = usersList.filter((user) => {
                 const checkedFields = [
-                    user.name.first.toLowerCase(),
-                    user.name.last.toLowerCase(),
-                    user.location.city.toLowerCase(),
+                    user.firstName.toLowerCase(),
+                    user.lastName.toLowerCase(),
+                    // user.location.city.toLowerCase(),
                 ].map((field) => field.includes(query));
 
                 const foundUser = checkedFields.some((field) => field);
@@ -57,7 +43,7 @@ const Search = () => {
         };
 
         updateFilteredUsers();
-    }, [query]);
+    }, [query, usersList]);
 
     return (
         <div className="container search-container">
@@ -65,9 +51,9 @@ const Search = () => {
             <div className="results-container">
                 {isPending && <Pending />}
                 {error && <ErrorFetchingData />}
-                {/* {data && ( */}
-                <ResultsList filteredUsers={filteredUsers} query={query} />
-                {/* )} */}
+                {usersList && (
+                    <ResultsList filteredUsers={filteredUsers} query={query} />
+                )}
             </div>
         </div>
     );

@@ -12,8 +12,8 @@ const usersController = {
     },
     listOne: async (req, res) => {
         try {
-            const userFound = await User.findById('615dc83bf792312969c41b5d');
-            res.send(userFound);
+            const foundUser = await User.findById('615dc83bf792312969c41b5d');
+            res.send(foundUser);
         } catch (error) {
             console.log(error);
         }
@@ -24,9 +24,9 @@ const usersController = {
             lastName: req.body.lastName,
         });
         try {
-            const userCreated = await user.save();
+            const createdUser = await user.save();
             console.log(req.body);
-            res.send(userCreated);
+            res.send(createdUser);
         } catch (error) {
             console.log(err);
         }

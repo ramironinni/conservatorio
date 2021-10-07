@@ -1,14 +1,18 @@
+// require modules
 const express = require('express');
-const usersRouter = require('./routes/users');
-const app = express();
 const mongoose = require('mongoose');
 const dotenv = require('dotenv');
-const bp = require('body-parser');
+
+// require routes
+const usersRouter = require('./routes/users');
+
+// instantiate express
+const app = express();
 
 // config env
 dotenv.config();
 
-// Connect to MongoDB
+// connect to MongoDB
 const dbURI = `mongodb+srv://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@cluster0.m3iwz.mongodb.net/conservatorioDB?retryWrites=true&w=majority`;
 mongoose
     .connect(dbURI)
@@ -19,8 +23,8 @@ mongoose
         console.log(err);
     });
 
-app.use(bp.json());
-app.use(bp.urlencoded({ extended: true }));
+// ----- MIDDLEWARES -----
+app.use(express.json());
 
 // CORS Headers => Required for cross-origin/ cross-server communication
 app.use((req, res, next) => {
