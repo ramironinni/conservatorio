@@ -1,7 +1,6 @@
 import SearchBar from './SearchBar/SearchBar';
 import useFetch from '../../utils/useFetch';
 import { useEffect, useState } from 'react';
-import { dummyDB } from '../../utils/dummy-db';
 import ResultsList from './ResultsList/ResultsList';
 import Pending from './Pending/Pending';
 import ErrorFetchingData from './ErrorFetchingData/ErrorFetchingData';
@@ -11,7 +10,7 @@ const Search = () => {
         data: usersList,
         isPending,
         error,
-    } = useFetch('http://localhost:5000/users');
+    } = useFetch('http://localhost:5000/api/users');
 
     const [query, setQuery] = useState('');
 

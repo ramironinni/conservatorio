@@ -1,4 +1,3 @@
-const dummyUsers = require('../dummy-users');
 const User = require('../models/user');
 
 const usersController = {

@@ -57,6 +57,17 @@ const NavBar = () => {
                             action="add"
                         />
                     </ul>
+                    <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                        <li className="nav-item">
+                            <Link
+                                className="nav-link"
+                                aria-current="page"
+                                to="/"
+                            >
+                                Logged Username
+                            </Link>
+                        </li>
+                    </ul>
                 </div>
             </div>
         </nav>

@@ -8,7 +8,7 @@ const UserDetail = () => {
     const clickHandler = () => {
         const deleteUser = async () => {
             const response = await fetch(
-                `http://localhost:5000/users/delete/${user._id}`,
+                `http://localhost:5000/api/users/delete/${user._id}`,
                 {
                     method: 'DELETE',
                 }
