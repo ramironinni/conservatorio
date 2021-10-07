@@ -9,15 +9,16 @@ const useFetch = (url) => {
         const abortCont = new AbortController();
 
         const getData = async () => {
-            try {
-                const response = await fetch(url, {
-                    signal: abortCont.signal,
-                });
-                const data = await response.json();
-                return data;
-            } catch (error) {
-                throw Error(error);
+            const response = await fetch(url, {
+                signal: abortCont.signal,
+            });
+
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
             }
+
+            const data = await response.json();
+            return data;
         };
 
         getData()
