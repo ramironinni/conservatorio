@@ -5,17 +5,18 @@ const usersController = {
     listAll: async (req, res) => {
         try {
             const usersList = await User.find();
-            res.send(usersList);
+            res.json(usersList);
         } catch (error) {
             console.log(error);
         }
     },
     listOne: async (req, res) => {
         try {
-            const foundUser = await User.findById('615dc83bf792312969c41b5d');
-            res.send(foundUser);
+            const foundUser = await User.findById(req.params.id);
+            res.json(foundUser);
         } catch (error) {
             console.log(error);
+            res.send("The user doesn't exist");
         }
     },
     create: async (req, res) => {
@@ -28,10 +29,19 @@ const usersController = {
             console.log(req.body);
             res.send(createdUser);
         } catch (error) {
-            console.log(err);
+            console.log(error);
         }
     },
-    delete: (req, res) => {},
+    delete: async (req, res) => {
+        const id = req.params.id;
+
+        try {
+            const deletedUser = await User.findByIdAndDelete(id);
+            res.send(deletedUser);
+        } catch (error) {
+            console.log(error);
+        }
+    },
     update: (req, res) => {},
 };
 
