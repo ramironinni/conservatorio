@@ -23,9 +23,9 @@ const usersController = {
             firstName: req.body.firstName,
             lastName: req.body.lastName,
         });
+
         try {
             const createdUser = await user.save();
-            console.log(req.body);
             res.send(createdUser);
         } catch (error) {
             console.log(error);

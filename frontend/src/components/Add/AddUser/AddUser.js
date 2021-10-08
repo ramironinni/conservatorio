@@ -18,18 +18,29 @@ const AddUser = () => {
         }
 
         const createUser = async () => {
-            const response = await fetch('http://localhost:5000/users/create', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json;charset=utf-8',
-                },
-                body: JSON.stringify(newUser),
-            });
+            const response = await fetch(
+                'http://localhost:5000/api/users/create',
+                {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json;charset=utf-8',
+                    },
+                    body: JSON.stringify(newUser),
+                }
+            );
             const result = await response.json();
             console.log(result);
+
+            if (result) {
+                setNewUser(null);
+            }
         };
 
-        createUser();
+        if (newUser) {
+            createUser()
+                // .then((data) => data)
+                .catch((e) => console.log(e));
+        }
     }, [newUser]);
 
     return (

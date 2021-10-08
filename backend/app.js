@@ -2,6 +2,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const dotenv = require('dotenv');
+const cors = require('cors');
 
 // require routes
 const usersRouter = require('./routes/users');
@@ -23,22 +24,11 @@ mongoose
         console.log(err);
     });
 
+// CORS Headers => Required for cross-origin/ cross-server communication
+app.use(cors());
+
 // ----- MIDDLEWARES -----
 app.use(express.json());
-
-// CORS Headers => Required for cross-origin/ cross-server communication
-app.use((req, res, next) => {
-    res.setHeader('Access-Control-Allow-Origin', '*');
-    res.setHeader(
-        'Access-Control-Allow-Headers',
-        'Origin, X-Requested-With, Content-Type, Accept, Authorization'
-    );
-    res.setHeader(
-        'Access-Control-Allow-Methods',
-        'GET, POST, PATCH, DELETE, OPTIONS'
-    );
-    next();
-});
 
 // ROUTES
 app.use('/api/users', usersRouter);
