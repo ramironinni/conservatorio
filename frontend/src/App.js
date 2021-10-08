@@ -19,16 +19,19 @@ function App() {
                         <Route exact path="/">
                             <Home />
                         </Route>
-                        <Route path="/search/user-detail">
+                        {/* <Route path="/search/user-detail">
+                            <UserDetail />
+                        </Route> */}
+                        <Route path="/search/users/id/:id" exact>
                             <UserDetail />
                         </Route>
-                        <Route path="/search/:type">
+                        <Route path="/search/:type" exact>
                             <Search />
                         </Route>
-                        <Route path="/add/user">
+                        <Route path="/add/user" exact>
                             <AddUser />
                         </Route>
-                        <Route path="/add/record">
+                        <Route path="/add/record" exact>
                             <AddRecord />
                         </Route>
                         <Route path="*">
