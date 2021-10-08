@@ -42,6 +42,7 @@ const usersController = {
         }
     },
     update: (req, res) => {},
+    login: (req, res) => {},
 };
 
 module.exports = usersController;

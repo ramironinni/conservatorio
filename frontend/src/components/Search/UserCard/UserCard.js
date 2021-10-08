@@ -5,7 +5,7 @@ const UserCard = ({ user, name, last, img }) => {
         <div className="col-lg-6">
             <Link
                 to={{
-                    pathname: '/search/user-detail',
+                    pathname: `/search/user-detail/${user._id}`,
                     state: { from: 'search', user },
                 }}
                 className="btn btn-semidark d-flex align-items-center m-3 p-3 rounded-3  border-start border-5 user-card-container"

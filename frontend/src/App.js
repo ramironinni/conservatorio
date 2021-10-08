@@ -14,7 +14,7 @@ function App() {
         <Router>
             <div className="App container-fluid bg-light px-0 d-flex flex-column min-vh-100">
                 <NavBar />
-                <div className="content flex-grow-1">
+                <main className="content flex-grow-1">
                     <Switch>
                         <Route exact path="/">
                             <Home />
@@ -35,7 +35,7 @@ function App() {
                             <NotFound />
                         </Route>
                     </Switch>
-                </div>
+                </main>
                 <Footer />
             </div>
         </Router>
