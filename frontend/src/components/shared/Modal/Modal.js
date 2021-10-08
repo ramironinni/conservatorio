@@ -1,16 +1,16 @@
-const Modal = ({ title, body, option1, option2, onDeleteUser }) => {
+const Modal = ({ id, title, body, option1, option2, onConfirm }) => {
     return (
         <div
             className="modal fade"
-            id="exampleModal"
+            id={id}
             tabIndex="-1"
-            aria-labelledby="exampleModalLabel"
+            aria-labelledby={`${id}Label`}
             aria-hidden="true"
         >
             <div className="modal-dialog">
                 <div className="modal-content">
                     <div className="modal-header">
-                        <h5 className="modal-title" id="exampleModalLabel">
+                        <h5 className="modal-title" id="Label">
                             {title}
                         </h5>
                         <button
@@ -26,7 +26,7 @@ const Modal = ({ title, body, option1, option2, onDeleteUser }) => {
                             type="button"
                             className="btn btn-danger"
                             data-bs-dismiss="modal"
-                            onClick={onDeleteUser}
+                            onClick={onConfirm}
                         >
                             {option1}
                         </button>

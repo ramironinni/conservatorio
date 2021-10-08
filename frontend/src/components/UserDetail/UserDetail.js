@@ -13,7 +13,7 @@ const UserDetail = () => {
         error,
     } = useFetch(`http://localhost:5000/api/users/id/${id}`);
 
-    const showModalHandler = () => {};
+    const onEditUser = () => {};
 
     const onDeleteUser = () => {
         const deleteUser = async () => {
@@ -62,28 +62,39 @@ const UserDetail = () => {
                                 <button
                                     type="button"
                                     className="btn btn-warning"
-                                    onClick={onDeleteUser}
+                                    data-bs-toggle="modal"
+                                    data-bs-target="#editUser"
                                 >
                                     Edit
                                 </button>
+                                <Modal
+                                    title="Edit confirmation"
+                                    body={
+                                        'Are you sure you want to edit this user?'
+                                    }
+                                    option1={'Yes'}
+                                    option2={'No'}
+                                    onConfirm={onEditUser}
+                                    id="editUser"
+                                />
 
                                 <button
                                     type="button"
                                     className="btn btn-danger"
                                     data-bs-toggle="modal"
-                                    data-bs-target="#exampleModal"
-                                    onClick={showModalHandler}
+                                    data-bs-target="#deleteUser"
                                 >
                                     Delete
                                 </button>
                                 <Modal
                                     title="Delete confirmation"
                                     body={
-                                        'Are you sure do you want to delete this user?'
+                                        'Are you sure you want to delete this user?'
                                     }
-                                    option1={'Yes'}
+                                    option1={'Yes, DELETE'}
                                     option2={'No'}
-                                    onDeleteUser={onDeleteUser}
+                                    onConfirm={onDeleteUser}
+                                    id="deleteUser"
                                 />
                             </div>
                         </div>
