@@ -2,7 +2,6 @@ import { useParams } from 'react-router-dom';
 import useFetch from '../../utils/useFetch';
 import ErrorFetchingData from '../Search/ErrorFetchingData/ErrorFetchingData';
 import Pending from '../Search/Pending/Pending';
-import Modal from '../shared/Modal/Modal';
 import DetailsButtonGroup from './DetailsButtonGroup';
 import UserDetailField from './UserDetailField';
 
