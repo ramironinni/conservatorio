@@ -1,8 +1,7 @@
-import FormInput from '../../../Forms/FormInput/FormInput';
-import FormSelect from '../../../Forms/FormSelect/FormSelect';
 import FormSubmitBtn from '../../../Forms/FormSubmitBtn/FormSubmitBtn';
 import FormCheck from '../../../Forms/FormCheck/FormCheck';
 import { useState } from 'react';
+import FormCol from '../../../Forms/FormCol';
 
 const AddRecordForm = () => {
     const [bookName, setBookName] = useState('');
@@ -62,7 +61,7 @@ const AddRecordForm = () => {
             <div className="row g-3">
                 <h4>Main</h4>
 
-                <FormSelect
+                <FormCol
                     size="lg-4"
                     options={['B4', '...', '...', '...']}
                     id="add-record__book-name"
@@ -71,7 +70,7 @@ const AddRecordForm = () => {
                     required
                 />
 
-                <FormInput
+                <FormCol
                     size="lg-4"
                     type="text"
                     id="add-record__record-number"
@@ -80,7 +79,7 @@ const AddRecordForm = () => {
                     required
                 />
 
-                <FormInput
+                <FormCol
                     size="lg-4"
                     type="date"
                     id="add-record__date"
@@ -89,7 +88,7 @@ const AddRecordForm = () => {
                     required
                 />
 
-                <FormSelect
+                <FormCol
                     size="12"
                     options={[
                         'regular',
@@ -103,7 +102,7 @@ const AddRecordForm = () => {
                     required
                 />
 
-                <FormSelect
+                <FormCol
                     size="12"
                     options={[
                         'Prof. en Música Orientación Instrumento',
@@ -118,7 +117,7 @@ const AddRecordForm = () => {
                     required
                 />
 
-                <FormSelect
+                <FormCol
                     size="12"
                     options={[
                         'Práctica Docente I',

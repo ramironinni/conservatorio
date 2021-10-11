@@ -1,9 +1,8 @@
-import FormInput from '../../../Forms/FormInput/FormInput';
-import FormSelect from '../../../Forms/FormSelect/FormSelect';
 import FormSubmitBtn from '../../../Forms/FormSubmitBtn/FormSubmitBtn';
 import FormCheck from '../../../Forms/FormCheck/FormCheck';
 import { useState } from 'react';
 import roles from '../../../../utils/roles';
+import FormCol from '../../../Forms/FormCol';
 
 const AddUserForm = ({ onGetNewUser }) => {
     const [firstName, setFirstName] = useState('');
@@ -167,7 +166,7 @@ const AddUserForm = ({ onGetNewUser }) => {
             <div className="row g-3">
                 <h4>Main</h4>
 
-                <FormInput
+                <FormCol
                     size="sm-6"
                     id="add-user__first-name"
                     type="text"
@@ -175,7 +174,7 @@ const AddUserForm = ({ onGetNewUser }) => {
                     value={firstName}
                     required
                 />
-                <FormInput
+                <FormCol
                     size="sm-6"
                     id="add-user__last-name"
                     type="text"
@@ -183,7 +182,7 @@ const AddUserForm = ({ onGetNewUser }) => {
                     value={lastName}
                     required
                 />
-                <FormInput
+                <FormCol
                     size="sm-6"
                     id="add-user__id-number"
                     type="text"
@@ -191,7 +190,7 @@ const AddUserForm = ({ onGetNewUser }) => {
                     value={idNumber}
                     required
                 />
-                <FormInput
+                <FormCol
                     size="sm-6"
                     id="add-user__date-of-birth"
                     type="date"
@@ -199,7 +198,7 @@ const AddUserForm = ({ onGetNewUser }) => {
                     value={dateOfBirth}
                     required
                 />
-                <FormSelect
+                <FormCol
                     size="sm-6"
                     options={['female', 'male', 'non-binary', 'other']}
                     id="add-user__gender"
@@ -207,7 +206,7 @@ const AddUserForm = ({ onGetNewUser }) => {
                     value={gender}
                     required
                 />
-                <FormSelect
+                <FormCol
                     size="sm-6"
                     options={['argentinian', '...', '...', '...']}
                     id="add-user__nationality"
@@ -218,7 +217,7 @@ const AddUserForm = ({ onGetNewUser }) => {
 
                 <h4 className="mt-5">Address</h4>
 
-                <FormInput
+                <FormCol
                     size="md-12"
                     id="add-user__street-name"
                     type="text"
@@ -226,7 +225,7 @@ const AddUserForm = ({ onGetNewUser }) => {
                     value={streetName}
                     required
                 />
-                <FormInput
+                <FormCol
                     size="md-4"
                     id="add-user__house-number"
                     type="text"
@@ -234,21 +233,21 @@ const AddUserForm = ({ onGetNewUser }) => {
                     value={houseNumber}
                     required
                 />
-                <FormInput
+                <FormCol
                     size="md-4"
                     id="add-user__floor"
                     type="text"
                     onChange={floorChangeHandler}
                     value={floor}
                 />
-                <FormInput
+                <FormCol
                     size="md-4"
                     id="add-user__apartment"
                     type="text"
                     onChange={apartmentChangeHandler}
                     value={apartment}
                 />
-                <FormInput
+                <FormCol
                     size="md-6"
                     id="add-user__city"
                     type="text"
@@ -256,7 +255,7 @@ const AddUserForm = ({ onGetNewUser }) => {
                     value={city}
                     required
                 />
-                <FormSelect
+                <FormCol
                     size="md-6"
                     options={['Buenos Aires', '...', '...', '...']}
                     id="add-user__state"
@@ -267,7 +266,7 @@ const AddUserForm = ({ onGetNewUser }) => {
 
                 <h4 className="mt-5">Contact</h4>
 
-                <FormInput
+                <FormCol
                     size="md-12"
                     id="add-user__email"
                     type="email"
@@ -275,7 +274,7 @@ const AddUserForm = ({ onGetNewUser }) => {
                     value={email}
                     required
                 />
-                <FormInput
+                <FormCol
                     size="md-3"
                     id="add-user__phone-1-code-area"
                     type="text"
@@ -283,7 +282,7 @@ const AddUserForm = ({ onGetNewUser }) => {
                     value={phone1CodeArea}
                     required
                 />
-                <FormInput
+                <FormCol
                     size="md-9"
                     id="add-user__phone-1-number"
                     type="text"
@@ -291,21 +290,21 @@ const AddUserForm = ({ onGetNewUser }) => {
                     value={phone1Number}
                     required
                 />
-                <FormInput
+                <FormCol
                     size="md-3"
                     id="add-user__phone-2-code-area"
                     type="text"
                     onChange={phone2CodeAreaChangeHandler}
                     value={phone2CodeArea}
                 />
-                <FormInput
+                <FormCol
                     size="md-9"
                     id="add-user__phone-2-number"
                     type="number"
                     onChange={phone2NumberChangeHandler}
                     value={phone2Number}
                 />
-                <FormInput
+                <FormCol
                     size="md-12"
                     id="add-user__profile-photo"
                     type="file"
