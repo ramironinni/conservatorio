@@ -12,7 +12,18 @@ const usersController = {
     listOne: async (req, res) => {
         try {
             const foundUser = await User.findById(req.params.id);
-            res.json(foundUser);
+
+            const data = {
+                createdAt: foundUser.createdAt,
+                updatedAt: foundUser.updatedAt,
+                user: {
+                    id: foundUser._id,
+                    firstName: foundUser.firstName,
+                    lastName: foundUser.lastName,
+                },
+            };
+
+            res.json(data);
         } catch (error) {
             console.log(error);
             res.send("The user doesn't exist");
@@ -36,6 +47,7 @@ const usersController = {
 
         try {
             const deletedUser = await User.findByIdAndDelete(id);
+            console.log('user deleted');
             res.send(deletedUser);
         } catch (error) {
             console.log(error);

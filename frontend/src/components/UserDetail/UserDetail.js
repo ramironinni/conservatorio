@@ -3,15 +3,14 @@ import useFetch from '../../utils/useFetch';
 import ErrorFetchingData from '../Search/ErrorFetchingData/ErrorFetchingData';
 import Pending from '../Search/Pending/Pending';
 import Modal from '../shared/Modal/Modal';
+import UserDetailField from './UserDetailField';
 
 const UserDetail = () => {
     const { id } = useParams();
 
-    const {
-        data: user,
-        isPending,
-        error,
-    } = useFetch(`http://localhost:5000/api/users/id/${id}`);
+    const { data, isPending, error } = useFetch(
+        `http://localhost:5000/api/users/id/${id}`
+    );
 
     const onEditUser = () => {};
 
@@ -19,7 +18,7 @@ const UserDetail = () => {
         const deleteUser = async () => {
             //show modal to accept or cancel
             const response = await fetch(
-                `http://localhost:5000/api/users/delete/${user._id}`,
+                `http://localhost:5000/api/users/delete/${data.user.id}`,
                 {
                     method: 'DELETE',
                 }
@@ -35,27 +34,27 @@ const UserDetail = () => {
         <div className="container-sm px-5-sm user-detail-container">
             {isPending && <Pending classNames={' mt-5'} />}
             {error && <ErrorFetchingData />}
-            {user && (
+            {data && console.log(data)}
+            {data && (
                 <div className="container">
                     <img
                         src="https://via.placeholder.com/150"
                         className="rounded mx-auto d-block my-4"
                         alt="..."
                     />
-                    <div className="row">
-                        <div className="col-md-2 bg-secondary">First name</div>
-                        <div className="col-md-9 border">{user.firstName}</div>
-                        <div className="col-md-2 bg-secondary">Last name</div>
-                        <div className="col-md-9 border">{user.lastName}</div>
-                        <div className="w-100 my-3"></div>
-                        <div className="col-md-2 bg-secondary">First name</div>
-                        <div className="col-md-9 border">{user.firstName}</div>
-                        <div className="col-md-2 bg-secondary">Last name</div>
-                        <div className="col-md-9 border">{user.lastName}</div>
-                        <div className="w-100 my-3"></div>
+                    <div className="container">
+                        {Object.entries(data.user).map((field, i) => {
+                            return (
+                                <UserDetailField
+                                    fieldName={field[0]}
+                                    fieldValue={field[1]}
+                                    key={i}
+                                />
+                            );
+                        })}
                         <div className="col-md-12 text-center">
                             <div
-                                className="btn-group"
+                                className="btn-group mt-5"
                                 role="group"
                                 aria-label="Basic mixed styles example"
                             >
