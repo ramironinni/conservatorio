@@ -19,9 +19,6 @@ function App() {
                         <Route exact path="/">
                             <Home />
                         </Route>
-                        {/* <Route path="/search/user-detail">
-                            <UserDetail />
-                        </Route> */}
                         <Route path="/search/users/id/:id" exact>
                             <UserDetail />
                         </Route>

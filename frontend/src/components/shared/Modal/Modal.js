@@ -1,5 +1,7 @@
+import ReactDOM from 'react-dom';
+
 const Modal = ({ id, title, body, option1, option2, onConfirm }) => {
-    return (
+    return ReactDOM.createPortal(
         <div
             className="modal fade"
             id={id}
@@ -40,7 +42,8 @@ const Modal = ({ id, title, body, option1, option2, onConfirm }) => {
                     </div>
                 </div>
             </div>
-        </div>
+        </div>,
+        document.getElementById('modal-root')
     );
 };
 
