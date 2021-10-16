@@ -34,7 +34,6 @@ const UserDetail = () => {
         <div className="container-sm px-5-sm user-detail-container">
             {isPending && <Pending classNames={' mt-5'} />}
             {error && <ErrorFetchingData />}
-            {data && console.log(data)}
             {data && (
                 <div className="container">
                     <img
