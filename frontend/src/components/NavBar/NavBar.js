@@ -3,7 +3,7 @@ import logo from '../../assets/logo.png';
 import './NavBar.css';
 import NavItemDropdown from './NavItemDropdown/NavItemDropdown';
 
-const NavBar = () => {
+const NavBar = ({ onLogout }) => {
     const items = [
         'student',
         'professor',
@@ -63,10 +63,15 @@ const NavBar = () => {
                             <NavLink
                                 className="nav-link"
                                 aria-current="page"
-                                to="/login"
+                                to=""
                             >
                                 Logged Username
                             </NavLink>
+                        </li>
+                        <li className="nav-item">
+                            <button className="btn btn-info" onClick={onLogout}>
+                                Logout
+                            </button>
                         </li>
                     </ul>
                 </div>
