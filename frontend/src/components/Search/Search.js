@@ -41,7 +41,13 @@ const Search = () => {
             setFilteredUsers(newFilteredUsers);
         };
 
-        updateFilteredUsers();
+        const identifier = setTimeout(() => {
+            updateFilteredUsers();
+        }, 500);
+
+        return () => {
+            clearTimeout(identifier);
+        };
     }, [query, usersList]);
 
     return (
