@@ -1,6 +1,6 @@
 import './Login.css';
 import logo from '../../assets/logo.png';
-import { useReducer, useState } from 'react';
+import { useReducer } from 'react';
 
 const Login = ({ onLogin }) => {
     const validateEmail = (value) => {
@@ -14,6 +14,8 @@ const Login = ({ onLogin }) => {
     const ACTIONS = {
         EMAIL_INPUT: 'EMAIL_INPUT',
         EMAIL_VALIDATION: 'EMAIL_VALIDATION',
+        PASSWORD_INPUT: 'PASSWORD_INPUT',
+        PASSWORD_VALIDATION: 'PASSWORD_VALIDATION',
     };
 
     const emailReducer = (state, action) => {
@@ -26,6 +28,7 @@ const Login = ({ onLogin }) => {
         if (action.type === ACTIONS.EMAIL_VALIDATION) {
             return { value: state.value, isValid: validateEmail(state.value) };
         }
+        return { value: '', isValid: false };
     };
 
     const [emailState, dispatchEmail] = useReducer(emailReducer, {
@@ -33,8 +36,34 @@ const Login = ({ onLogin }) => {
         isValid: false,
     });
 
-    // const [enteredEmail, setEnteredEmail] = useState('');
-    const [enteredPassword, setEnteredPassword] = useState('');
+    const validatePassword = (value) => {
+        if (value.length > 5) {
+            return true;
+        }
+
+        return false;
+    };
+
+    const passwordReducer = (state, action) => {
+        if (action.type === ACTIONS.PASSWORD_INPUT) {
+            return {
+                value: action.value,
+                isValid: validatePassword(action.value),
+            };
+        }
+        if (action.type === ACTIONS.PASSWORD_VALIDATION) {
+            return {
+                value: state.value,
+                isValid: validatePassword(state.value),
+            };
+        }
+        return { value: '', isValid: false };
+    };
+
+    const [passwordState, dispatchPassword] = useReducer(passwordReducer, {
+        value: '',
+        isValid: false,
+    });
 
     const currentYear = () => {
         return new Date().getFullYear();
@@ -44,17 +73,23 @@ const Login = ({ onLogin }) => {
         dispatchEmail({ type: ACTIONS.EMAIL_INPUT, value: e.target.value });
     };
 
-    const emailPasswordHandler = (e) => {
-        setEnteredPassword(e.target.value);
+    const passwordChangeHandler = (e) => {
+        dispatchPassword({
+            type: ACTIONS.PASSWORD_INPUT,
+            value: e.target.value,
+        });
     };
 
     const submitHandler = (e) => {
         e.preventDefault();
         dispatchEmail({ type: ACTIONS.EMAIL_VALIDATION });
-        if (emailState.isValid) {
-            onLogin(emailState.value, enteredPassword);
+        dispatchPassword({ type: ACTIONS.PASSWORD_VALIDATION });
+        console.log(emailState.isValid);
+        console.log(passwordState.isValid);
+        if (emailState.isValid && passwordState.isValid) {
+            onLogin(emailState.value, passwordState.value);
         } else {
-            console.log('invalid email');
+            console.log('invalid email or password');
         }
     };
 
@@ -88,8 +123,8 @@ const Login = ({ onLogin }) => {
                             className="form-control"
                             id="floatingPassword"
                             placeholder="Password"
-                            onChange={emailPasswordHandler}
-                            value={enteredPassword}
+                            onChange={passwordChangeHandler}
+                            value={passwordState.value}
                         />
                         <label htmlFor="floatingPassword">Password</label>
                     </div>
