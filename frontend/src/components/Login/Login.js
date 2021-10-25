@@ -1,6 +1,6 @@
 import './Login.css';
 import logo from '../../assets/logo.png';
-import { useReducer } from 'react';
+import { useEffect, useReducer, useState } from 'react';
 
 const Login = ({ onLogin }) => {
     const validateEmail = (value) => {
@@ -80,6 +80,20 @@ const Login = ({ onLogin }) => {
         });
     };
 
+    const [formIsValid, setFormIsValid] = useState(false);
+
+    useEffect(() => {
+        const identifier = setTimeout(() => {
+            console.log('Checking form validity!');
+            setFormIsValid(emailState.isValid && passwordState.isValid);
+        }, 500);
+
+        return () => {
+            console.log('CLEANUP');
+            clearTimeout(identifier);
+        };
+    }, [emailState.isValid, passwordState.isValid]);
+
     const submitHandler = (e) => {
         e.preventDefault();
         dispatchEmail({ type: ACTIONS.EMAIL_VALIDATION });
@@ -138,6 +152,7 @@ const Login = ({ onLogin }) => {
                     <button
                         className="w-100 btn btn-lg btn-primary"
                         type="submit"
+                        disabled={!formIsValid}
                     >
                         Log in
                     </button>

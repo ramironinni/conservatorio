@@ -1,5 +1,7 @@
+import { useContext } from 'react';
 import { NavLink } from 'react-router-dom';
 import logo from '../../assets/logo.png';
+import AuthContext from '../../store/auth-context';
 import './NavBar.css';
 import NavItemDropdown from './NavItemDropdown/NavItemDropdown';
 
@@ -13,6 +15,8 @@ const NavBar = ({ onLogout }) => {
         'janitor',
         'librarian',
     ];
+
+    const ctx = useContext(AuthContext);
 
     return (
         <nav className="navbar navbar-expand-sm navbar-dark bg-dark">
@@ -59,20 +63,27 @@ const NavBar = ({ onLogout }) => {
                         />
                     </ul>
                     <ul className="navbar-nav ms-auto mb-2 mb-lg-0">
-                        <li className="nav-item">
-                            <NavLink
-                                className="nav-link"
-                                aria-current="page"
-                                to=""
-                            >
-                                Logged Username
-                            </NavLink>
-                        </li>
-                        <li className="nav-item">
-                            <button className="btn btn-info" onClick={onLogout}>
-                                Logout
-                            </button>
-                        </li>
+                        {ctx.isLoggedIn && (
+                            <>
+                                <li className="nav-item">
+                                    <NavLink
+                                        className="nav-link"
+                                        aria-current="page"
+                                        to=""
+                                    >
+                                        Logged Username
+                                    </NavLink>
+                                </li>
+                                <li className="nav-item">
+                                    <button
+                                        className="btn btn-info"
+                                        onClick={onLogout}
+                                    >
+                                        Logout
+                                    </button>
+                                </li>
+                            </>
+                        )}
                     </ul>
                 </div>
             </div>
