@@ -1,11 +1,11 @@
 import { useContext } from 'react';
 import { NavLink } from 'react-router-dom';
-import logo from '../../assets/logo.png';
-import AuthContext from '../../store/auth-context';
+import logo from '../../../assets/logo.png';
+import AuthContext from '../../../store/auth-context';
 import './NavBar.css';
 import NavItemDropdown from './NavItemDropdown/NavItemDropdown';
 
-const NavBar = ({ onLogout }) => {
+const NavBar = () => {
     const items = [
         'student',
         'professor',
@@ -77,7 +77,7 @@ const NavBar = ({ onLogout }) => {
                                 <li className="nav-item">
                                     <button
                                         className="btn btn-info"
-                                        onClick={onLogout}
+                                        onClick={ctx.onLogout}
                                     >
                                         Logout
                                     </button>
