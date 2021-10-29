@@ -2,15 +2,24 @@ import getFieldNameFromId from '../../utils/getFieldNameFromId';
 import Input from './Input';
 import Select from './Select';
 
-const FormCol = ({ size, id, type, value, onChange, options, required }) => {
+const FormCol = ({
+    size,
+    id,
+    type,
+    value,
+    onChange,
+    isValid,
+    options,
+    required,
+}) => {
     const fieldName = getFieldNameFromId(id);
     const classSize = `col-${size}`;
-
     const element = type ? (
         <Input
             type={type}
             id={id}
             classNames={`form-control ${classSize}`}
+            isValid={isValid}
             value={value}
             onChange={onChange}
             required={required}

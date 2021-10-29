@@ -172,6 +172,7 @@ const AddUserForm = ({ onGetNewUser }) => {
                     type="text"
                     onChange={firstNameChangeHandler}
                     value={firstName}
+                    isValid={null}
                     required
                 />
                 <FormCol

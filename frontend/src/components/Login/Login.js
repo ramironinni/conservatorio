@@ -1,78 +1,74 @@
 import './Login.css';
 import logo from '../../assets/logo.png';
-import { useContext, useEffect, useReducer, useState } from 'react';
+import { useContext, useEffect, useReducer, useRef, useState } from 'react';
 import AuthContext from '../../store/auth-context';
 import Input from '../Forms/Input';
-import FormCheck from '../Forms/FormCheck/FormCheck';
+import getCurrentYear from '../../utils/getCurrentYear';
+
+const ACTIONS = {
+    EMAIL_INPUT: 'EMAIL_INPUT',
+    EMAIL_BLUR: 'EMAIL_BLUR',
+    PASSWORD_INPUT: 'PASSWORD_INPUT',
+    PASSWORD_BLUR: 'PASSWORD_BLUR',
+};
+
+const emailReducer = (state, action) => {
+    if (action.type === ACTIONS.EMAIL_INPUT) {
+        return {
+            value: action.value,
+            isValid: validateEmail(action.value),
+        };
+    }
+    if (action.type === ACTIONS.EMAIL_BLUR) {
+        return { value: state.value, isValid: validateEmail(state.value) };
+    }
+    return { value: '', isValid: false };
+};
+
+const passwordReducer = (state, action) => {
+    if (action.type === ACTIONS.PASSWORD_INPUT) {
+        return {
+            value: action.value,
+            isValid: validatePassword(action.value),
+        };
+    }
+    if (action.type === ACTIONS.PASSWORD_BLUR) {
+        return {
+            value: state.value,
+            isValid: validatePassword(state.value),
+        };
+    }
+    return { value: '', isValid: false };
+};
+
+const validateEmail = (value) => {
+    if (value.includes('@')) {
+        return true;
+    }
+
+    return false;
+};
+
+const validatePassword = (value) => {
+    if (value.length > 5) {
+        return true;
+    }
+
+    return false;
+};
 
 const Login = () => {
     const authCtx = useContext(AuthContext);
 
-    const validateEmail = (value) => {
-        if (value.includes('@')) {
-            return true;
-        }
-
-        return false;
-    };
-
-    const ACTIONS = {
-        EMAIL_INPUT: 'EMAIL_INPUT',
-        EMAIL_VALIDATION: 'EMAIL_VALIDATION',
-        PASSWORD_INPUT: 'PASSWORD_INPUT',
-        PASSWORD_VALIDATION: 'PASSWORD_VALIDATION',
-    };
-
-    const emailReducer = (state, action) => {
-        if (action.type === ACTIONS.EMAIL_INPUT) {
-            return {
-                value: action.value,
-                isValid: validateEmail(action.value),
-            };
-        }
-        if (action.type === ACTIONS.EMAIL_VALIDATION) {
-            return { value: state.value, isValid: validateEmail(state.value) };
-        }
-        return { value: '', isValid: false };
-    };
-
     const [emailState, dispatchEmail] = useReducer(emailReducer, {
         value: '',
-        isValid: false,
+        isValid: null,
     });
-
-    const validatePassword = (value) => {
-        if (value.length > 5) {
-            return true;
-        }
-
-        return false;
-    };
-
-    const passwordReducer = (state, action) => {
-        if (action.type === ACTIONS.PASSWORD_INPUT) {
-            return {
-                value: action.value,
-                isValid: validatePassword(action.value),
-            };
-        }
-        if (action.type === ACTIONS.PASSWORD_VALIDATION) {
-            return {
-                value: state.value,
-                isValid: validatePassword(state.value),
-            };
-        }
-        return { value: '', isValid: false };
-    };
 
     const [passwordState, dispatchPassword] = useReducer(passwordReducer, {
         value: '',
-        isValid: false,
+        isValid: null,
     });
-
-    const currentYear = () => {
-        return new Date().getFullYear();
-    };
 
     const emailChangeHandler = (e) => {
         dispatchEmail({ type: ACTIONS.EMAIL_INPUT, value: e.target.value });
@@ -85,7 +81,18 @@ const Login = () => {
         });
     };
 
+    const validateEmailHandler = () => {
+        dispatchEmail({ type: ACTIONS.EMAIL_BLUR });
+    };
+
+    const validatePasswordHandler = () => {
+        dispatchPassword({ type: ACTIONS.PASSWORD_BLUR });
+    };
+
     const [formIsValid, setFormIsValid] = useState(false);
+
+    const emailInputRef = useRef();
+    const passwordInputRef = useRef();
 
     useEffect(() => {
         const identifier = setTimeout(() => {
@@ -101,14 +108,15 @@ const Login = () => {
 
     const submitHandler = (e) => {
         e.preventDefault();
-        dispatchEmail({ type: ACTIONS.EMAIL_VALIDATION });
-        dispatchPassword({ type: ACTIONS.PASSWORD_VALIDATION });
-        console.log(emailState.isValid);
-        console.log(passwordState.isValid);
-        if (emailState.isValid && passwordState.isValid) {
+
+        if (formIsValid) {
             authCtx.onLogin(emailState.value, passwordState.value);
+        } else if (!emailState.isValid) {
+            emailInputRef.current.focus();
+            console.log('invalid email');
         } else {
-            console.log('invalid email or password');
+            passwordInputRef.current.focus();
+            console.log('invalid password');
         }
     };
 
@@ -123,24 +131,28 @@ const Login = () => {
                         width="57"
                         height="57"
                     />
-                    {/* <h1 className="h4 mb-3 fw-normal">Log in</h1> */}
-
                     <div className="form-floating">
                         <Input
+                            ref={emailInputRef}
                             type="email"
                             id="emailInput"
+                            isValid={emailState.isValid}
                             placeholder="name@example.com"
                             onChange={emailChangeHandler}
+                            onBlur={validateEmailHandler}
                             value={emailState.value}
                         />
                         <label htmlFor="emailInput">Email address</label>
                     </div>
                     <div className="form-floating">
                         <Input
+                            ref={passwordInputRef}
                             type="password"
                             id="passwordInput"
+                            isValid={passwordState.isValid}
                             placeholder="Password"
                             onChange={passwordChangeHandler}
+                            onBlur={validatePasswordHandler}
                             value={passwordState.value}
                         />
                         <label htmlFor="passwordInput">Password</label>
@@ -155,12 +167,11 @@ const Login = () => {
                     <button
                         className="w-100 btn btn-lg btn-primary"
                         type="submit"
-                        disabled={!formIsValid}
                     >
                         Log in
                     </button>
                     <p className="mt-5 mb-3 text-muted">
-                        &copy; {currentYear()}
+                        &copy; {getCurrentYear()}
                     </p>
                 </form>
             </main>
