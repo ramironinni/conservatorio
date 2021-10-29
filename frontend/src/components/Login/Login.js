@@ -2,6 +2,8 @@ import './Login.css';
 import logo from '../../assets/logo.png';
 import { useContext, useEffect, useReducer, useState } from 'react';
 import AuthContext from '../../store/auth-context';
+import Input from '../Forms/Input';
+import FormCheck from '../Forms/FormCheck/FormCheck';
 
 const Login = () => {
     const authCtx = useContext(AuthContext);
@@ -124,26 +126,24 @@ const Login = () => {
                     {/* <h1 className="h4 mb-3 fw-normal">Log in</h1> */}
 
                     <div className="form-floating">
-                        <input
+                        <Input
                             type="email"
-                            className="form-control"
-                            id="floatingInput"
+                            id="emailInput"
                             placeholder="name@example.com"
                             onChange={emailChangeHandler}
                             value={emailState.value}
                         />
-                        <label htmlFor="floatingInput">Email address</label>
+                        <label htmlFor="emailInput">Email address</label>
                     </div>
                     <div className="form-floating">
-                        <input
+                        <Input
                             type="password"
-                            className="form-control"
-                            id="floatingPassword"
+                            id="passwordInput"
                             placeholder="Password"
                             onChange={passwordChangeHandler}
                             value={passwordState.value}
                         />
-                        <label htmlFor="floatingPassword">Password</label>
+                        <label htmlFor="passwordInput">Password</label>
                     </div>
 
                     <div className="checkbox mb-3">
