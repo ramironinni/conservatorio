@@ -1,8 +1,11 @@
 import './Login.css';
 import logo from '../../assets/logo.png';
-import { useEffect, useReducer, useState } from 'react';
+import { useContext, useEffect, useReducer, useState } from 'react';
+import AuthContext from '../../store/auth-context';
 
-const Login = ({ onLogin }) => {
+const Login = () => {
+    const authCtx = useContext(AuthContext);
+
     const validateEmail = (value) => {
         if (value.includes('@')) {
             return true;
@@ -101,7 +104,7 @@ const Login = ({ onLogin }) => {
         console.log(emailState.isValid);
         console.log(passwordState.isValid);
         if (emailState.isValid && passwordState.isValid) {
-            onLogin(emailState.value, passwordState.value);
+            authCtx.onLogin(emailState.value, passwordState.value);
         } else {
             console.log('invalid email or password');
         }

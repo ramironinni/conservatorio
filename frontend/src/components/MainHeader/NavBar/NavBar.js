@@ -16,7 +16,7 @@ const NavBar = () => {
         'librarian',
     ];
 
-    const ctx = useContext(AuthContext);
+    const authCtx = useContext(AuthContext);
 
     return (
         <nav className="navbar navbar-expand-sm navbar-dark bg-dark">
@@ -63,7 +63,7 @@ const NavBar = () => {
                         />
                     </ul>
                     <ul className="navbar-nav ms-auto mb-2 mb-lg-0">
-                        {ctx.isLoggedIn && (
+                        {authCtx.isLoggedIn && (
                             <>
                                 <li className="nav-item">
                                     <NavLink
@@ -77,7 +77,7 @@ const NavBar = () => {
                                 <li className="nav-item">
                                     <button
                                         className="btn btn-info"
-                                        onClick={ctx.onLogout}
+                                        onClick={authCtx.onLogout}
                                     >
                                         Logout
                                     </button>
