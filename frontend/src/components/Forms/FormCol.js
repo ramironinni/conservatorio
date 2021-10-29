@@ -1,36 +1,29 @@
-import capitalizeWord from '../../utils/capitalizeWord';
 import getFieldNameFromId from '../../utils/getFieldNameFromId';
+import Input from './Input';
+import Select from './Select';
 
 const FormCol = ({ size, id, type, value, onChange, options, required }) => {
     const fieldName = getFieldNameFromId(id);
     const classSize = `col-${size}`;
 
     const element = type ? (
-        <input
+        <Input
             type={type}
             id={id}
-            className={`form-control ${classSize}`}
+            classNames={`form-control ${classSize}`}
             value={value}
             onChange={onChange}
             required={required}
         />
     ) : (
-        <select
+        <Select
             id={id}
-            className="form-select"
+            classNames={'form-select'}
             value={value}
             onChange={onChange}
+            options={options}
             required={required}
-        >
-            <option value="">Choose...</option>
-            {options.map((option, key) => {
-                return (
-                    <option value={option} key={key}>
-                        {capitalizeWord(option)}
-                    </option>
-                );
-            })}
-        </select>
+        />
     );
 
     return (
