@@ -3,7 +3,7 @@ import NavLinkDropdownToggle from './NavLinkDropdownToggle/NavLinkDropdownToggle
 
 const NavItemDropdown = ({ title, items, action }) => {
     return (
-        <li className="nav-item dropdown">
+        <li className={`nav-item dropdown`}>
             <NavLinkDropdownToggle title={title} />
             <DropdownMenu items={items} action={action} />
         </li>

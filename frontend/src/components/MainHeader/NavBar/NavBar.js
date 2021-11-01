@@ -64,25 +64,45 @@ const NavBar = () => {
                     </ul>
                     <ul className="navbar-nav ms-auto mb-2 mb-lg-0">
                         {authCtx.isLoggedIn && (
-                            <>
-                                <li className="nav-item">
-                                    <NavLink
-                                        className="nav-link"
-                                        aria-current="page"
-                                        to=""
-                                    >
-                                        Logged Username
-                                    </NavLink>
-                                </li>
-                                <li className="nav-item">
-                                    <button
-                                        className="btn btn-info"
-                                        onClick={authCtx.onLogout}
-                                    >
-                                        Logout
-                                    </button>
-                                </li>
-                            </>
+                            <div className="btn-group">
+                                <button
+                                    type="button"
+                                    className="btn btn-dark dropdown-toggle"
+                                    data-bs-toggle="dropdown"
+                                    aria-expanded="false"
+                                >
+                                    <i className="bi bi-person-fill"></i>&nbsp;
+                                    {authCtx.user.email}
+                                </button>
+                                <ul className="dropdown-menu dropdown-menu-end">
+                                    <li>
+                                        <NavLink
+                                            className="dropdown-item"
+                                            to="/user/profile"
+                                        >
+                                            Profile
+                                        </NavLink>
+                                    </li>
+                                    <li>
+                                        <NavLink
+                                            className="dropdown-item"
+                                            to="/user/configuration"
+                                        >
+                                            Configuration
+                                        </NavLink>
+                                    </li>
+
+                                    <li>
+                                        <button
+                                            className="dropdown-item"
+                                            type="button"
+                                            onClick={authCtx.onLogout}
+                                        >
+                                            Logout
+                                        </button>
+                                    </li>
+                                </ul>
+                            </div>
                         )}
                     </ul>
                 </div>

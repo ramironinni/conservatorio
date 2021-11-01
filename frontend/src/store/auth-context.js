@@ -2,12 +2,14 @@ import React, { useEffect, useState } from 'react';
 
 const AuthContext = React.createContext({
     isLoggedIn: true,
+    user: {},
     onLogout: () => {},
     onLogin: (email, password) => {},
 });
 
 export const AuthContextProvider = (props) => {
     const [isLoggedIn, setIsLoggedIn] = useState(false);
+    const [user, setUser] = useState({ email: null });
 
     useEffect(() => {
         const isLoginStoraged = localStorage.getItem('isLoggedIn');
@@ -17,8 +19,9 @@ export const AuthContextProvider = (props) => {
         }
     }, []);
 
-    const loginHandler = () => {
+    const loginHandler = (email, password) => {
         localStorage.setItem('isLoggedIn', '1');
+        setUser({ email });
         setIsLoggedIn(true);
     };
 
@@ -31,6 +34,7 @@ export const AuthContextProvider = (props) => {
         <AuthContext.Provider
             value={{
                 isLoggedIn,
+                user,
                 onLogin: loginHandler,
                 onLogout: logoutHanlder,
             }}

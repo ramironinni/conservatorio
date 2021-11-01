@@ -11,6 +11,8 @@ import MainHeader from './components/MainHeader/MainHeader';
 import { useContext } from 'react';
 import AuthContext from './store/auth-context';
 import Login from './components/Login/Login';
+import UserProfile from './components/User/UserProfile';
+import UserConfiguration from './components/User/UserConfiguration';
 
 function App() {
     const authCtx = useContext(AuthContext);
@@ -36,6 +38,12 @@ function App() {
                         </Route>
                         <Route path="/add/user" exact>
                             <AddUser />
+                        </Route>
+                        <Route path="/user/profile" exact>
+                            <UserProfile />
+                        </Route>
+                        <Route path="/user/configuration" exact>
+                            <UserConfiguration />
                         </Route>
                         <Route path="/add/record" exact>
                             <AddRecord />
