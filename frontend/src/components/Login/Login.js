@@ -12,6 +12,8 @@ const ACTIONS = {
     PASSWORD_BLUR: 'PASSWORD_BLUR',
 };
 
+const defaultEmail = { value: '', isValid: false };
+
 const emailReducer = (state, action) => {
     if (action.type === ACTIONS.EMAIL_INPUT) {
         return {
@@ -22,8 +24,18 @@ const emailReducer = (state, action) => {
     if (action.type === ACTIONS.EMAIL_BLUR) {
         return { value: state.value, isValid: validateEmail(state.value) };
     }
-    return { value: '', isValid: false };
+    return defaultEmail;
 };
+
+const validateEmail = (value) => {
+    if (value.includes('@')) {
+        return true;
+    }
+
+    return false;
+};
+
+const defaultPassword = { value: '', isValid: false };
 
 const passwordReducer = (state, action) => {
     if (action.type === ACTIONS.PASSWORD_INPUT) {
@@ -38,15 +50,7 @@ const passwordReducer = (state, action) => {
             isValid: validatePassword(state.value),
         };
     }
-    return { value: '', isValid: false };
-};
-
-const validateEmail = (value) => {
-    if (value.includes('@')) {
-        return true;
-    }
-
-    return false;
+    return defaultPassword;
 };
 
 const validatePassword = (value) => {
@@ -60,15 +64,12 @@ const validatePassword = (value) => {
 const Login = () => {
     const authCtx = useContext(AuthContext);
 
-    const [emailState, dispatchEmail] = useReducer(emailReducer, {
-        value: '',
-        isValid: null,
-    });
+    const [emailState, dispatchEmail] = useReducer(emailReducer, defaultEmail);
 
-    const [passwordState, dispatchPassword] = useReducer(passwordReducer, {
-        value: '',
-        isValid: null,
-    });
+    const [passwordState, dispatchPassword] = useReducer(
+        passwordReducer,
+        defaultPassword
+    );
 
     const emailChangeHandler = (e) => {
         dispatchEmail({ type: ACTIONS.EMAIL_INPUT, value: e.target.value });
