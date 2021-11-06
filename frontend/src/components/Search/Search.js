@@ -61,7 +61,7 @@ const Search = () => {
     }
 
     if (error) {
-        content = <ErrorFetchingData />;
+        content = <ErrorFetchingData error={error} />;
     }
 
     return (

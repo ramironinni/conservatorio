@@ -1,5 +1,13 @@
-const ErrorFetchingData = () => {
-    return <div className="results-pending">Cannot fetch the data</div>;
+const ErrorFetchingData = ({ error }) => {
+    return (
+        <div className="alert alert-danger error-fetching-data" role="alert">
+            <h4 class="alert-heading">
+                <i class="bi bi-x-octagon-fill"></i>&nbsp;Cannot fetch the data
+            </h4>
+            <hr />
+            <p class="mb-0">{error}</p>
+        </div>
+    );
 };
 
 export default ErrorFetchingData;
