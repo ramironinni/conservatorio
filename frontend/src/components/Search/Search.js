@@ -50,16 +50,24 @@ const Search = () => {
         };
     }, [query, usersList]);
 
+    let content = '';
+
+    if (isPending) {
+        content = <Pending />;
+    }
+
+    if (usersList) {
+        content = <ResultsList filteredUsers={filteredUsers} query={query} />;
+    }
+
+    if (error) {
+        content = <ErrorFetchingData />;
+    }
+
     return (
         <div className="container search-container">
             <SearchBar query={query} onQueryChange={queryChangeHandler} />
-            <div className="results-container">
-                {isPending && <Pending />}
-                {error && <ErrorFetchingData />}
-                {usersList && (
-                    <ResultsList filteredUsers={filteredUsers} query={query} />
-                )}
-            </div>
+            <div className="results-container">{content}</div>
         </div>
     );
 };
