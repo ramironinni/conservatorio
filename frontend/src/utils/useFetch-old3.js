@@ -1,19 +1,16 @@
 import { useState, useEffect, useCallback } from 'react';
 
-const useFetch = (url, config) => {
+const useFetch = (url) => {
     const [data, setData] = useState(null);
     const [isPending, setIsPending] = useState(true);
     const [error, setError] = useState(null);
 
     const getData = useCallback(async () => {
         // const abortCont = new AbortController();
-        const settings = {
-            ...config,
-            // signal: abortCont.signal
-        };
-
         try {
-            const response = await fetch(url, settings);
+            const response = await fetch(url, {
+                // signal: abortCont.signal,
+            });
 
             if (!response.ok) {
                 throw new Error(`HTTP error! Status: ${response.status}`);
@@ -26,7 +23,7 @@ const useFetch = (url, config) => {
             setError(error.message);
         }
         setIsPending(false);
-    }, [url, config]);
+    }, [url]);
 
     useEffect(() => {
         getData();
