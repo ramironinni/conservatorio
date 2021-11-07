@@ -1,6 +1,9 @@
 const ErrorFetchingData = ({ error }) => {
     return (
-        <div className="alert alert-danger error-fetching-data" role="alert">
+        <div
+            className="alert alert-danger error-fetching-data mt-3"
+            role="alert"
+        >
             <h4 class="alert-heading">
                 <i class="bi bi-x-octagon-fill"></i>&nbsp;Cannot fetch the data
             </h4>

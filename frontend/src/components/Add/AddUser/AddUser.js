@@ -62,7 +62,6 @@ const AddUser = () => {
             <Redirect
                 to={{
                     pathname: `/search/users/id/${userCreatedId}`,
-                    search: '?utm=your+face',
                     state: { referrer: location },
                 }}
             />
