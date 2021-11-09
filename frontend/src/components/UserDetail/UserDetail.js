@@ -1,5 +1,5 @@
 import { useParams, useLocation } from 'react-router-dom';
-import useFetch from '../../utils/useFetch';
+import useFetch from '../../hooks/useFetch';
 import ErrorFetchingData from '../Search/ErrorFetchingData/ErrorFetchingData';
 import Pending from '../Search/Pending/Pending';
 import AlertDismissible from '../shared/Modal/AlertDismissible';

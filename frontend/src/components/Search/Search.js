@@ -1,5 +1,5 @@
 import SearchBar from './SearchBar/SearchBar';
-import useFetch from '../../utils/useFetch';
+import useFetch from '../../hooks/useFetch';
 import { useEffect, useState } from 'react';
 import ResultsList from './ResultsList/ResultsList';
 import Pending from './Pending/Pending';
