@@ -1,39 +1,38 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useCallback, useState } from 'react';
 
-const useFetch = (url, config) => {
-    const [data, setData] = useState(null);
-    const [isPending, setIsPending] = useState(true);
+const useFetch = () => {
+    const [isPending, setIsPending] = useState(false);
     const [error, setError] = useState(null);
 
-    const getData = useCallback(async () => {
+    const sendRequest = useCallback(async (url, config, applyData) => {
         // const abortCont = new AbortController();
-        const settings = {
-            ...config,
-            // signal: abortCont.signal
-        };
+        // const settings = config
+        //     ? {
+        //           ...config,
+        //           // signal: abortCont.signal
+        //       }
+        //     : null;
+
+        setIsPending(true);
+        setError(null);
 
         try {
-            const response = await fetch(url, settings);
+            const response = await fetch(url, config);
 
             if (!response.ok) {
-                throw new Error(`HTTP error! Status: ${response.status}`);
+                throw new Error(`Request failed! Status: ${response.status}`);
             }
 
             const data = await response.json();
-            setData(data);
+            applyData(data);
             setError(null);
         } catch (error) {
-            setError(error.message);
+            setError(error.message || 'Something went wrong!');
         }
         setIsPending(false);
-    }, [url, config]);
+    }, []);
 
-    useEffect(() => {
-        getData();
-        // return () => abortCont.abort();
-    }, [getData]);
-
-    return { data, isPending, error };
+    return { isPending, error, sendRequest };
 };
 
 export default useFetch;

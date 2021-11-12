@@ -1,4 +1,6 @@
+import { useEffect, useMemo } from 'react';
 import { useParams, useLocation } from 'react-router-dom';
+import { useState } from 'react/cjs/react.development';
 import useFetch from '../../hooks/useFetch';
 import ErrorFetchingData from '../Search/ErrorFetchingData/ErrorFetchingData';
 import Pending from '../Search/Pending/Pending';
@@ -9,11 +11,21 @@ import UserDetailField from './UserDetailField';
 const UserDetail = () => {
     const location = useLocation();
 
+    const [user, setUser] = useState();
+
     const { id } = useParams();
 
-    const { data, isPending, error } = useFetch(
-        `http://localhost:5000/api/users/id/${id}`
-    );
+    const { isPending, error, sendRequest: fetchUser } = useFetch();
+
+    const url = `http://localhost:5000/api/users/id/${id}`;
+
+    useEffect(() => {
+        const applyData = (data) => {
+            setUser(data.user);
+        };
+
+        fetchUser(url, null, applyData);
+    }, [fetchUser, url]);
 
     const onEditUser = () => {};
 
@@ -21,7 +33,7 @@ const UserDetail = () => {
         const deleteUser = async () => {
             //show modal to accept or cancel
             const response = await fetch(
-                `http://localhost:5000/api/users/delete/${data.user.id}`,
+                `http://localhost:5000/api/users/delete/${user.id}`,
                 {
                     method: 'DELETE',
                 }
@@ -50,7 +62,7 @@ const UserDetail = () => {
         content = <Pending classNames={' mt-5'} />;
     }
 
-    if (data) {
+    if (user) {
         content = (
             <div className="container">
                 <img
@@ -59,7 +71,7 @@ const UserDetail = () => {
                     alt="..."
                 />
                 <div className="container">
-                    {Object.entries(data.user).map((field, i) => {
+                    {Object.entries(user).map((field, i) => {
                         return (
                             <UserDetailField
                                 fieldName={field[0]}
