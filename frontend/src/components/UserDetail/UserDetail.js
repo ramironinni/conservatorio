@@ -1,5 +1,6 @@
 import { useEffect, useMemo } from 'react';
 import { useParams, useLocation } from 'react-router-dom';
+import { Redirect } from 'react-router-dom/cjs/react-router-dom.min';
 import { useState } from 'react/cjs/react.development';
 import useFetch from '../../hooks/useFetch';
 import ErrorFetchingData from '../Search/ErrorFetchingData/ErrorFetchingData';
@@ -12,6 +13,7 @@ const UserDetail = () => {
     const location = useLocation();
 
     const [user, setUser] = useState();
+    const [deletedUser, setDeletedUser] = useState();
 
     const { id } = useParams();
 
@@ -30,20 +32,42 @@ const UserDetail = () => {
     const onEditUser = () => {};
 
     const onDeleteUser = () => {
-        const deleteUser = async () => {
-            //show modal to accept or cancel
-            const response = await fetch(
-                `http://localhost:5000/api/users/delete/${user.id}`,
-                {
-                    method: 'DELETE',
-                }
-            );
-            const result = await response.json();
-            console.log('DELETED', result);
+        // const deleteUser = async () => {
+        //     //show modal to accept or cancel
+        //     const response = await fetch(
+        //         `http://localhost:5000/api/users/delete/${user.id}`,
+        //         {
+        //             method: 'DELETE',
+        //         }
+        //     );
+        //     const result = await response.json();
+        //     console.log('DELETED', result);
+        // };
+
+        const applyData = (data) => {
+            console.log(data);
+            setDeletedUser(data);
         };
 
-        deleteUser();
+        fetchUser(
+            `http://localhost:5000/api/users/delete/${user.id}`,
+            {
+                method: 'DELETE',
+            },
+            applyData
+        );
     };
+
+    if (deletedUser) {
+        return (
+            <Redirect
+                to={{
+                    pathname: `/search/deleted`,
+                    state: { deleted: true },
+                }}
+            />
+        );
+    }
 
     let userCreatedAlert = '';
 

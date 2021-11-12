@@ -4,8 +4,12 @@ import { useEffect, useState } from 'react';
 import ResultsList from './ResultsList/ResultsList';
 import Pending from './Pending/Pending';
 import ErrorFetchingData from './ErrorFetchingData/ErrorFetchingData';
+import AlertDismissible from '../shared/Modal/AlertDismissible';
+import { useLocation } from 'react-router-dom/cjs/react-router-dom.min';
 
 const Search = () => {
+    const location = useLocation();
+
     const [data, setData] = useState();
 
     const { isPending, error, sendRequest: fetchUsers } = useFetch();
@@ -57,6 +61,17 @@ const Search = () => {
     //     };
     // }, [query, data]);
 
+    let userDeletedAlert = '';
+
+    if (location.state && location.state.deleted === true) {
+        userDeletedAlert = (
+            <AlertDismissible
+                type="success"
+                text="User successfully deleted!"
+            />
+        );
+    }
+
     let content = '';
 
     if (isPending) {
@@ -74,6 +89,7 @@ const Search = () => {
 
     return (
         <div className="container search-container">
+            {userDeletedAlert}
             {/* <SearchBar query={query} onQueryChange={queryChangeHandler} /> */}
             <div className="results-container">{content}</div>
         </div>
