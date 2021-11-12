@@ -9,6 +9,7 @@ const usersController = {
             console.log(error);
         }
     },
+    listFiltered: async (req, res) => {},
     listOne: async (req, res) => {
         try {
             const foundUser = await User.findById(req.params.id);

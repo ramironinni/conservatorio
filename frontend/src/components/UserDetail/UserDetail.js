@@ -1,6 +1,5 @@
-import { useEffect, useMemo } from 'react';
+import { useEffect } from 'react';
 import { useParams, useLocation } from 'react-router-dom';
-import { Redirect } from 'react-router-dom/cjs/react-router-dom.min';
 import { useState } from 'react/cjs/react.development';
 import useFetch from '../../hooks/useFetch';
 import ErrorFetchingData from '../Search/ErrorFetchingData/ErrorFetchingData';
@@ -11,63 +10,36 @@ import UserDetailField from './UserDetailField';
 
 const UserDetail = () => {
     const location = useLocation();
+    const { id } = useParams();
 
     const [user, setUser] = useState();
     const [deletedUser, setDeletedUser] = useState();
-
-    const { id } = useParams();
+    const [url, setUrl] = useState(`http://localhost:5000/api/users/id/${id}`);
+    const [config, setConfig] = useState(null);
 
     const { isPending, error, sendRequest: fetchUser } = useFetch();
 
-    const url = `http://localhost:5000/api/users/id/${id}`;
-
     useEffect(() => {
         const applyData = (data) => {
-            setUser(data.user);
+            if (!config) {
+                setUser(data.user);
+            }
+            if (config) {
+                setDeletedUser(true);
+            }
         };
 
-        fetchUser(url, null, applyData);
-    }, [fetchUser, url]);
+        fetchUser(url, config, applyData);
+
+        return () => {};
+    }, [fetchUser, url, config]);
 
     const onEditUser = () => {};
 
     const onDeleteUser = () => {
-        // const deleteUser = async () => {
-        //     //show modal to accept or cancel
-        //     const response = await fetch(
-        //         `http://localhost:5000/api/users/delete/${user.id}`,
-        //         {
-        //             method: 'DELETE',
-        //         }
-        //     );
-        //     const result = await response.json();
-        //     console.log('DELETED', result);
-        // };
-
-        const applyData = (data) => {
-            console.log(data);
-            setDeletedUser(data);
-        };
-
-        fetchUser(
-            `http://localhost:5000/api/users/delete/${user.id}`,
-            {
-                method: 'DELETE',
-            },
-            applyData
-        );
+        setUrl(`http://localhost:5000/api/users/delete/${user.id}`);
+        setConfig({ method: 'DELETE' });
     };
-
-    if (deletedUser) {
-        return (
-            <Redirect
-                to={{
-                    pathname: `/search/deleted`,
-                    state: { deleted: true },
-                }}
-            />
-        );
-    }
 
     let userCreatedAlert = '';
 
@@ -110,6 +82,15 @@ const UserDetail = () => {
                     />
                 </div>
             </div>
+        );
+    }
+
+    if (deletedUser) {
+        content = (
+            <AlertDismissible
+                type="success"
+                text="User successfully deleted!"
+            />
         );
     }
 

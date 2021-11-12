@@ -11,6 +11,7 @@ const Search = () => {
     const location = useLocation();
 
     const [data, setData] = useState();
+    const [query, setQuery] = useState('');
 
     const { isPending, error, sendRequest: fetchUsers } = useFetch();
 
@@ -23,11 +24,9 @@ const Search = () => {
         // return () => abortCont.abort();
     }, [fetchUsers]);
 
-    // const [query, setQuery] = useState('');
-
-    // const queryChangeHandler = (query) => {
-    //     setQuery(query.toLowerCase());
-    // };
+    const queryChangeHandler = (inputQuery) => {
+        setQuery(inputQuery.toLowerCase());
+    };
 
     // const [filteredUsers, setFilteredUsers] = useState([]);
 
@@ -90,7 +89,7 @@ const Search = () => {
     return (
         <div className="container search-container">
             {userDeletedAlert}
-            {/* <SearchBar query={query} onQueryChange={queryChangeHandler} /> */}
+            <SearchBar query={query} onQueryChange={queryChangeHandler} />
             <div className="results-container">{content}</div>
         </div>
     );
