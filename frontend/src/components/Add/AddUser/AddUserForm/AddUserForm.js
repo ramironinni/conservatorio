@@ -3,9 +3,18 @@ import FormCheck from '../../../Forms/FormCheck/FormCheck';
 import { useState } from 'react';
 import roles from '../../../../utils/roles';
 import FormCol from '../../../Forms/FormCol';
+import useInput from '../../../../hooks/useInput';
 
 const AddUserForm = ({ onGetNewUser }) => {
-    const [firstName, setFirstName] = useState('');
+    const {
+        enteredValue: firstName,
+        valueIsValid: firstNameIsValid,
+        validationFeedback: firstNameValidationFeedback,
+        valueChangeHandler: firstNameChangeHandler,
+        inputBlurHandler: firstNameBlurHandler,
+        reset: resetFirstName,
+    } = useInput((value) => value.trim() !== '');
+
     const [lastName, setLastName] = useState('');
     const [idNumber, setIdNumber] = useState('');
     const [dateOfBirth, setDateOfBirth] = useState('');
@@ -27,9 +36,11 @@ const AddUserForm = ({ onGetNewUser }) => {
         new Array(roles.length).fill(false)
     );
 
-    const firstNameChangeHandler = (e) => {
-        setFirstName(e.target.value);
-    };
+    let formIsValid = false;
+
+    if (firstNameIsValid) {
+        formIsValid = true;
+    }
 
     const lastNameChangeHandler = (e) => {
         setLastName(e.target.value);
@@ -110,6 +121,10 @@ const AddUserForm = ({ onGetNewUser }) => {
     const submitHandler = (e) => {
         e.preventDefault();
 
+        if (!firstNameIsValid) {
+            return;
+        }
+
         const assignedRoles = selectedRoles.reduce((acc, cur, i) => {
             if (cur) {
                 acc.push(roles[i]);
@@ -138,9 +153,9 @@ const AddUserForm = ({ onGetNewUser }) => {
             assignedRoles,
         };
 
-        onGetNewUser(newUser);
+        // onGetNewUser(newUser);
 
-        setFirstName('');
+        resetFirstName();
         setLastName('');
         setIdNumber('');
         setDateOfBirth('');
@@ -171,8 +186,9 @@ const AddUserForm = ({ onGetNewUser }) => {
                     id="add-user__first-name"
                     type="text"
                     onChange={firstNameChangeHandler}
+                    onBlur={firstNameBlurHandler}
                     value={firstName}
-                    isValid={null}
+                    isValid={firstNameValidationFeedback}
                     required
                 />
                 <FormCol
@@ -330,7 +346,7 @@ const AddUserForm = ({ onGetNewUser }) => {
                     );
                 })}
             </div>
-            <FormSubmitBtn element="user" />
+            <FormSubmitBtn element="user" disabled={!formIsValid} />
         </form>
     );
 };

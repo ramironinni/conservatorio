@@ -8,6 +8,7 @@ const FormCol = ({
     type,
     value,
     onChange,
+    onBlur,
     isValid,
     options,
     required,
@@ -22,6 +23,7 @@ const FormCol = ({
             isValid={isValid}
             value={value}
             onChange={onChange}
+            onBlur={onBlur}
             required={required}
         />
     ) : (
