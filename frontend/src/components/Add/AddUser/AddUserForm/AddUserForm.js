@@ -5,6 +5,8 @@ import roles from '../../../../utils/roles';
 import FormCol from '../../../Forms/FormCol';
 import useInput from '../../../../hooks/useInput';
 
+const isNotEmpty = (value) => value.trim() !== '';
+
 const AddUserForm = ({ onGetNewUser }) => {
     const {
         enteredValue: firstName,
@@ -13,9 +15,17 @@ const AddUserForm = ({ onGetNewUser }) => {
         valueChangeHandler: firstNameChangeHandler,
         inputBlurHandler: firstNameBlurHandler,
         reset: resetFirstName,
-    } = useInput((value) => value.trim() !== '');
+    } = useInput(isNotEmpty);
 
-    const [lastName, setLastName] = useState('');
+    const {
+        enteredValue: lastName,
+        valueIsValid: lastNameIsValid,
+        validationFeedback: lastNameValidationFeedback,
+        valueChangeHandler: lastNameChangeHandler,
+        inputBlurHandler: lastNameBlurHandler,
+        reset: resetLastName,
+    } = useInput(isNotEmpty);
+
     const [idNumber, setIdNumber] = useState('');
     const [dateOfBirth, setDateOfBirth] = useState('');
     const [gender, setGender] = useState('');
@@ -38,13 +48,9 @@ const AddUserForm = ({ onGetNewUser }) => {
 
     let formIsValid = false;
 
-    if (firstNameIsValid) {
+    if (firstNameIsValid && lastNameIsValid) {
         formIsValid = true;
     }
-
-    const lastNameChangeHandler = (e) => {
-        setLastName(e.target.value);
-    };
 
     const idNumberChangeHandler = (e) => {
         setIdNumber(e.target.value);
@@ -121,7 +127,7 @@ const AddUserForm = ({ onGetNewUser }) => {
     const submitHandler = (e) => {
         e.preventDefault();
 
-        if (!firstNameIsValid) {
+        if (!formIsValid) {
             return;
         }
 
@@ -156,7 +162,7 @@ const AddUserForm = ({ onGetNewUser }) => {
         // onGetNewUser(newUser);
 
         resetFirstName();
-        setLastName('');
+        resetLastName();
         setIdNumber('');
         setDateOfBirth('');
         setGender('');
@@ -196,7 +202,9 @@ const AddUserForm = ({ onGetNewUser }) => {
                     id="add-user__last-name"
                     type="text"
                     onChange={lastNameChangeHandler}
+                    onBlur={lastNameBlurHandler}
                     value={lastName}
+                    isValid={lastNameValidationFeedback}
                     required
                 />
                 <FormCol
