@@ -1,4 +1,5 @@
 import React from 'react';
+import Checkbox from '../../components/Forms/new/Checkbox';
 import Input from '../../components/Forms/new/Input';
 import Select from '../../components/Forms/new/Select';
 import camelCasedToText from '../camelCasedToText';
@@ -10,14 +11,14 @@ import {
     passwordMatchRule,
 } from './inputValidationRules';
 
-/**
- * creates and returns object representation of form field
- *
- * @param {string} label - label to show with the form input
- * @param {string} name - input name
- * @param {string} type - input type
- * @param {string} defaultValue - default value for the input
- */
+// /**
+//  * creates and returns object representation of form field
+//  *
+//  * @param {string} label - label to show with the form input
+//  * @param {string} name - input name
+//  * @param {string} type - input type
+//  * @param {string} defaultValue - default value for the input
+//  */
 function createFormFieldConfig(
     name,
     size,
@@ -44,6 +45,33 @@ function createFormFieldConfig(
         ) => {
             return (
                 <Input
+                    id={id}
+                    key={key}
+                    name={name}
+                    type={type}
+                    label={label}
+                    isValid={isValid}
+                    value={value}
+                    handleChange={handleChange}
+                    handleBlur={handleBlur}
+                    errorMessage={error}
+                    size={size}
+                />
+            );
+        };
+    }
+
+    if (formField === 'input' && type === 'checkbox') {
+        renderField = (
+            handleChange,
+            value,
+            isValid,
+            error,
+            key,
+            handleBlur
+        ) => {
+            return (
+                <Checkbox
                     id={id}
                     key={key}
                     name={name}
@@ -144,8 +172,8 @@ export const addRecordFormConfig = {
         ),
         validationRules: [
             requiredRule('Record Number'),
-            minLengthRule('Record Number', 8),
-            maxLengthRule('Record Number', 20),
+            minLengthRule('Record Number', 1),
+            maxLengthRule('Record Number', 6),
         ],
     },
     recordDate: {
@@ -196,7 +224,15 @@ export const addRecordFormConfig = {
         ),
         validationRules: [requiredRule('Subject Name')],
     },
-    // isAnulled: {
-    // checkbox
-    // },
+    isAnulled: {
+        ...createFormFieldConfig(
+            'Anulled',
+            'md-12',
+            addRecord.prefix,
+            'input',
+            'checkbox',
+            null
+        ),
+        validationRules: [],
+    },
 };

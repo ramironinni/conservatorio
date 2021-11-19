@@ -87,7 +87,6 @@ function useForm(formObj) {
             }
         }
 
-        console.log(isValid);
         return isValid;
     }, [form]);
 
