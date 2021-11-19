@@ -1,11 +1,11 @@
 import AddContent from '../AddContent/AddContent';
 import AddRecordForm from './AddRecordForm/AddRecordForm';
-import { signupForm } from '../../../utils/forms/formConfig';
+import { addRecordFormConfig } from '../../../utils/forms/formConfig';
 import useForm from '../../../hooks/useForm';
 
 const AddRecord = () => {
     const { renderFormFields, isFormValid, getFormValues } =
-        useForm(signupForm);
+        useForm(addRecordFormConfig);
 
     const submitHandler = (e) => {
         e.preventDefault();

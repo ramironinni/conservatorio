@@ -1,6 +1,7 @@
 import React from 'react';
 import Input from '../../components/Forms/new/Input';
 import Select from '../../components/Forms/new/Select';
+import camelCasedToText from '../camelCasedToText';
 
 import {
     requiredRule,
@@ -18,15 +19,18 @@ import {
  * @param {string} defaultValue - default value for the input
  */
 function createFormFieldConfig(
-    label,
     name,
-    type,
     size,
-    id,
+    idPrefix,
     formField,
+    type,
     options,
     defaultValue = ''
 ) {
+    const label = camelCasedToText(name);
+
+    const id = idPrefix.concat(name);
+
     let renderField;
 
     if (formField === 'input') {
@@ -94,29 +98,49 @@ function createFormFieldConfig(
     };
 }
 
-const bookNames = ['B4', '...', '...', '...'];
+const addRecord = {
+    prefix: 'addRecord__',
+    bookNames: ['B4', '...', '...', '...'],
+    studentConditions: [
+        'regular',
+        'independent studies student',
+        'course equivalency',
+        'other',
+    ],
+    courseName: [
+        'Prof. en Música Orientación Instrumento',
+        'Prof. en Música Orientación Educación Musical',
+        'Tecnicatura en Capacitación Instrumental',
+        'Formación Básica para Jóvenes y Adultos',
+        'Formación Básica para Niños y Pre-adolescentes',
+    ],
+    subjectName: [
+        'Práctica Docente I',
+        'Didáctica',
+        'Historia de la Música III',
+    ],
+};
 
-export const signupForm = {
+export const addRecordFormConfig = {
     bookName: {
         ...createFormFieldConfig(
-            'Book Name',
             'bookName',
-            'text',
             'md-4',
-            'addRecord__bookName',
+            addRecord.prefix,
             'select',
-            bookNames
+            null,
+            addRecord.bookNames
         ),
         validationRules: [requiredRule('Book Name')],
     },
     recordNumber: {
         ...createFormFieldConfig(
-            'Record Number',
             'recordNumber',
-            'text',
             'md-4',
-            'addRecord__recordNumber',
-            'input'
+            addRecord.prefix,
+            'input',
+            'text',
+            null
         ),
         validationRules: [
             requiredRule('Record Number'),
@@ -124,4 +148,55 @@ export const signupForm = {
             maxLengthRule('Record Number', 20),
         ],
     },
+    recordDate: {
+        ...createFormFieldConfig(
+            'recordDate',
+            'md-4',
+            addRecord.prefix,
+            'input',
+            'date',
+            null
+        ),
+        validationRules: [
+            requiredRule('Record Date'),
+            minLengthRule('Record Date', 8),
+            maxLengthRule('Record Date', 20),
+        ],
+    },
+    studentCondition: {
+        ...createFormFieldConfig(
+            'studentCondition',
+            'md-4',
+            addRecord.prefix,
+            'select',
+            null,
+            addRecord.studentConditions
+        ),
+        validationRules: [requiredRule('Student Condition')],
+    },
+    courseName: {
+        ...createFormFieldConfig(
+            'courseName',
+            'md-4',
+            addRecord.prefix,
+            'select',
+            null,
+            addRecord.studentConditions
+        ),
+        validationRules: [requiredRule('Course Name')],
+    },
+    subjectName: {
+        ...createFormFieldConfig(
+            'subjectName',
+            'md-4',
+            addRecord.prefix,
+            'select',
+            null,
+            addRecord.subjectName
+        ),
+        validationRules: [requiredRule('Subject Name')],
+    },
+    // isAnulled: {
+    // checkbox
+    // },
 };
