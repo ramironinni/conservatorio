@@ -19,6 +19,9 @@ function useForm(formObj) {
 
     const isInputFieldValid = useCallback(
         (inputField) => {
+            // if (inputField.validationRules.length === 0) {
+            //     return true;
+            // }
             for (const rule of inputField.validationRules) {
                 if (!rule.validate(inputField.value, form)) {
                     inputField.errorMessage = rule.message;
