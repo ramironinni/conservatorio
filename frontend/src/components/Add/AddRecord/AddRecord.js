@@ -4,7 +4,7 @@ import { signupForm } from '../../../utils/forms/formConfig';
 import useForm from '../../../hooks/useForm';
 
 const AddRecord = () => {
-    const { renderFormInputs, isFormValid, getFormValues } =
+    const { renderFormFields, isFormValid, getFormValues } =
         useForm(signupForm);
 
     const submitHandler = (e) => {
@@ -22,7 +22,7 @@ const AddRecord = () => {
                     onSubmit={submitHandler}
                     isFormValid={isFormValid()}
                 >
-                    {renderFormInputs()}
+                    {renderFormFields()}
                 </AddRecordForm>
             </AddContent>
         </div>

@@ -1,20 +1,17 @@
 import React from 'react';
 
-function Input(props) {
-    const {
-        label,
-        type,
-        name,
-        handleChange,
-        handleBlur,
-        errorMessage,
-        isValid,
-        value,
-        size,
-        id,
-        classNames,
-    } = props;
-
+function Input({
+    id,
+    label,
+    type,
+    name,
+    handleChange,
+    handleBlur,
+    errorMessage,
+    isValid,
+    value,
+    size,
+}) {
     const classIsValid =
         isValid === false ? 'is-invalid' : isValid === true ? 'is-valid' : '';
 
@@ -32,7 +29,7 @@ function Input(props) {
                 value={value}
                 onChange={handleChange}
                 onBlur={handleBlur}
-                className={`form-control ${classNames} ${classIsValid}`}
+                className={`form-control ${classIsValid}`}
             />
             <div className="invalid-feedback">{errorMessage}</div>
         </div>

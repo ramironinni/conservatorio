@@ -3,10 +3,10 @@ import { useState, useCallback } from 'react';
 function useForm(formObj) {
     const [form, setForm] = useState(formObj);
 
-    function renderFormInputs() {
+    function renderFormFields() {
         return Object.values(form).map((inputObj) => {
-            const { value, label, errorMessage, valid, renderInput } = inputObj;
-            return renderInput(
+            const { value, label, errorMessage, valid, renderField } = inputObj;
+            return renderField(
                 onInputChange,
                 value,
                 valid,
@@ -95,7 +95,7 @@ function useForm(formObj) {
         return form;
     };
 
-    return { renderFormInputs, isFormValid, getFormValues };
+    return { renderFormFields, isFormValid, getFormValues };
 }
 
 export default useForm;
