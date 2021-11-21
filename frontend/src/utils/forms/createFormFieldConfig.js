@@ -18,42 +18,8 @@ export const createFormFieldConfig = (
 
     let renderField;
 
-    if (formField === 'input') {
-        renderField = (
-            handleChange,
-            value,
-            isValid,
-            error,
-            key,
-            handleBlur
-        ) => {
-            return (
-                <Input
-                    id={id}
-                    key={key}
-                    name={name}
-                    type={type}
-                    label={label}
-                    isValid={isValid}
-                    value={value}
-                    handleChange={handleChange}
-                    handleBlur={handleBlur}
-                    errorMessage={error}
-                    size={size}
-                />
-            );
-        };
-    }
-
-    if (formField === 'input' && type === 'checkbox') {
-        renderField = (
-            handleChange,
-            value,
-            isValid,
-            error,
-            key,
-            handleBlur
-        ) => {
+    renderField = (handleChange, handleBlur, value, isValid, error, key) => {
+        if (formField === 'input' && type === 'checkbox') {
             return (
                 <Checkbox
                     id={id}
@@ -69,18 +35,26 @@ export const createFormFieldConfig = (
                     size={size}
                 />
             );
-        };
-    }
+        }
+        if (formField === 'input') {
+            return (
+                <Input
+                    id={id}
+                    key={key}
+                    name={name}
+                    type={type}
+                    label={label}
+                    isValid={isValid}
+                    value={value}
+                    handleChange={handleChange}
+                    handleBlur={handleBlur}
+                    errorMessage={error}
+                    size={size}
+                />
+            );
+        }
 
-    if (formField === 'select') {
-        renderField = (
-            handleChange,
-            value,
-            isValid,
-            error,
-            key,
-            handleBlur
-        ) => {
+        if (formField === 'select') {
             return (
                 <Select
                     id={id}
@@ -97,8 +71,8 @@ export const createFormFieldConfig = (
                     options={options}
                 />
             );
-        };
-    }
+        }
+    };
 
     return {
         renderField,

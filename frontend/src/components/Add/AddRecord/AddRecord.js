@@ -9,19 +9,16 @@ const AddRecord = () => {
 
     const submitHandler = (e) => {
         e.preventDefault();
-        if (isFormValid) {
-            const values = getFormValues();
-            console.log(values);
-        }
+        // if (isFormValid()) {
+        const values = getFormValues();
+        console.log(values);
+        // }
     };
 
     return (
         <div className="container add-record-container">
             <AddContent element="record">
-                <AddRecordForm
-                    onSubmit={submitHandler}
-                    isFormValid={isFormValid()}
-                >
+                <AddRecordForm onSubmit={submitHandler} isFormValid={true}>
                     {renderFormFields()}
                 </AddRecordForm>
             </AddContent>

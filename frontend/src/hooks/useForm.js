@@ -7,21 +7,21 @@ function useForm(formObj) {
         return Object.values(form).map((inputObj) => {
             const { value, label, errorMessage, valid, renderField } = inputObj;
             return renderField(
-                onInputChange,
+                inputChangeHandler,
+                inputBlurHandler,
                 value,
                 valid,
                 errorMessage,
-                label,
-                onBlur
+                label
             );
         });
     }
 
     const isInputFieldValid = useCallback(
         (inputField) => {
-            // if (inputField.validationRules.length === 0) {
-            //     return true;
-            // }
+            if (inputField.validationRules.length === 0) {
+                return true;
+            }
             for (const rule of inputField.validationRules) {
                 if (!rule.validate(inputField.value, form)) {
                     inputField.errorMessage = rule.message;
@@ -34,7 +34,7 @@ function useForm(formObj) {
         [form]
     );
 
-    const onBlur = useCallback(
+    const inputBlurHandler = useCallback(
         (e) => {
             const { name } = e.target;
             const inputObj = { ...form[name] };
@@ -55,7 +55,7 @@ function useForm(formObj) {
         [form, isInputFieldValid]
     );
 
-    const onInputChange = useCallback(
+    const inputChangeHandler = useCallback(
         (event) => {
             const { name, value } = event.target;
             const inputObj = { ...form[name] };

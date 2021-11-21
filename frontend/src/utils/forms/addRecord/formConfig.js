@@ -85,7 +85,7 @@ export const formConfig = {
     },
     isAnulled: {
         ...createFormFieldConfig(
-            'anulled',
+            'isAnulled',
             'md-12',
             data.prefix,
             'input',
