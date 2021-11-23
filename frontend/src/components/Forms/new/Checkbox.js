@@ -9,11 +9,20 @@ function Checkbox({
     handleBlur,
     errorMessage,
     isValid,
-    value,
+    checked,
     size,
+    isRequired,
 }) {
-    const classIsValid =
-        isValid === false ? 'is-invalid' : isValid === true ? 'is-valid' : '';
+    let classIsValid = '';
+
+    if (isRequired) {
+        classIsValid =
+            isValid === false
+                ? 'is-invalid'
+                : isValid === true
+                ? 'is-valid'
+                : '';
+    }
 
     const classSize = `col-${size}`;
 
@@ -23,7 +32,7 @@ function Checkbox({
                 type={type}
                 id={id}
                 name={name}
-                value={value}
+                checked={checked}
                 onChange={handleChange}
                 onBlur={handleBlur}
                 className={`form-check-input ${classIsValid}`}

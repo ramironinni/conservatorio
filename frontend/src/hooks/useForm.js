@@ -6,6 +6,7 @@ function useForm(formObj) {
     function renderFormFields() {
         return Object.values(form).map((inputObj) => {
             const { value, label, errorMessage, valid, renderField } = inputObj;
+
             return renderField(
                 inputChangeHandler,
                 inputBlurHandler,
@@ -57,9 +58,15 @@ function useForm(formObj) {
 
     const inputChangeHandler = useCallback(
         (event) => {
-            const { name, value } = event.target;
+            const { name, value, type, checked } = event.target;
             const inputObj = { ...form[name] };
-            inputObj.value = value;
+
+            if (type === 'checkbox') {
+                inputObj.checked = checked;
+                inputObj.value = checked;
+            } else {
+                inputObj.value = value;
+            }
 
             const isValidInput = isInputFieldValid(inputObj);
             if (isValidInput) {
@@ -93,11 +100,7 @@ function useForm(formObj) {
         return isValid;
     }, [form]);
 
-    const getFormValues = () => {
-        return form;
-    };
-
-    return { renderFormFields, isFormValid, getFormValues };
+    return { renderFormFields, isFormValid };
 }
 
 export default useForm;

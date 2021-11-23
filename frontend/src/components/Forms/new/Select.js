@@ -12,9 +12,18 @@ function Select({
     value,
     size,
     options,
+    isRequired,
 }) {
-    const classIsValid =
-        isValid === false ? 'is-invalid' : isValid === true ? 'is-valid' : '';
+    let classIsValid = '';
+
+    if (isRequired) {
+        classIsValid =
+            isValid === false
+                ? 'is-invalid'
+                : isValid === true
+                ? 'is-valid'
+                : '';
+    }
 
     const classSize = `col-${size}`;
 

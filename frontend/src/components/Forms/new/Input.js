@@ -11,9 +11,18 @@ function Input({
     isValid,
     value,
     size,
+    isRequired,
 }) {
-    const classIsValid =
-        isValid === false ? 'is-invalid' : isValid === true ? 'is-valid' : '';
+    let classIsValid = '';
+
+    if (isRequired) {
+        classIsValid =
+            isValid === false
+                ? 'is-invalid'
+                : isValid === true
+                ? 'is-valid'
+                : '';
+    }
 
     const classSize = `col-${size}`;
 

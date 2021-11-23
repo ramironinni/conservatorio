@@ -16,7 +16,8 @@ export const formConfig = {
             data.prefix,
             'select',
             null,
-            data.bookNames
+            data.bookNames,
+            true
         ),
         validationRules: [requiredRule('Book Name')],
     },
@@ -27,7 +28,8 @@ export const formConfig = {
             data.prefix,
             'input',
             'text',
-            null
+            null,
+            true
         ),
         validationRules: [
             requiredRule('Record Number'),
@@ -42,7 +44,8 @@ export const formConfig = {
             data.prefix,
             'input',
             'date',
-            null
+            null,
+            true
         ),
         validationRules: [
             requiredRule('Record Date'),
@@ -57,7 +60,8 @@ export const formConfig = {
             data.prefix,
             'select',
             null,
-            data.studentConditions
+            data.studentConditions,
+            true
         ),
         validationRules: [requiredRule('Student Condition')],
     },
@@ -68,7 +72,8 @@ export const formConfig = {
             data.prefix,
             'select',
             null,
-            data.studentConditions
+            data.courseName,
+            true
         ),
         validationRules: [requiredRule('Course Name')],
     },
@@ -79,7 +84,8 @@ export const formConfig = {
             data.prefix,
             'select',
             null,
-            data.subjectName
+            data.subjectName,
+            true
         ),
         validationRules: [requiredRule('Subject Name')],
     },
@@ -90,7 +96,8 @@ export const formConfig = {
             data.prefix,
             'input',
             'checkbox',
-            null
+            null,
+            false
         ),
         validationRules: [],
     },

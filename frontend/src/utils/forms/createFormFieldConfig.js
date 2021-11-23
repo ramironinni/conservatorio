@@ -10,7 +10,8 @@ export const createFormFieldConfig = (
     formField,
     type,
     options,
-    defaultValue = ''
+    isRequired,
+    value = ''
 ) => {
     const label = camelCasedToText(name);
 
@@ -28,11 +29,12 @@ export const createFormFieldConfig = (
                     type={type}
                     label={label}
                     isValid={isValid}
-                    value={value}
+                    checked={value}
                     handleChange={handleChange}
                     handleBlur={handleBlur}
                     errorMessage={error}
                     size={size}
+                    isRequired={isRequired}
                 />
             );
         }
@@ -50,6 +52,7 @@ export const createFormFieldConfig = (
                     handleBlur={handleBlur}
                     errorMessage={error}
                     size={size}
+                    isRequired={isRequired}
                 />
             );
         }
@@ -69,6 +72,7 @@ export const createFormFieldConfig = (
                     errorMessage={error}
                     size={size}
                     options={options}
+                    isRequired={isRequired}
                 />
             );
         }
@@ -77,8 +81,9 @@ export const createFormFieldConfig = (
     return {
         renderField,
         label,
-        value: defaultValue,
-        valid: null,
+        value,
+        valid: isRequired ? null : true,
+        isRequired,
         errorMessage: '',
         touched: false,
     };
