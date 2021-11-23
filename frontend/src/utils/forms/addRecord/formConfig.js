@@ -2,10 +2,12 @@ import { createFormFieldConfig } from '../createFormFieldConfig';
 import { data } from './data';
 
 import {
-    requiredRule,
+    isRequired,
     minLengthRule,
     maxLengthRule,
-    passwordMatchRule,
+    isDate,
+    isLength,
+    isEmail,
 } from '../inputValidationRules';
 
 export const formConfig = {
@@ -19,7 +21,7 @@ export const formConfig = {
             data.bookNames,
             true
         ),
-        validationRules: [requiredRule('Book Name')],
+        validationRules: [isRequired()],
     },
     recordNumber: {
         ...createFormFieldConfig(
@@ -31,11 +33,7 @@ export const formConfig = {
             null,
             true
         ),
-        validationRules: [
-            requiredRule('Record Number'),
-            minLengthRule('Record Number', 1),
-            maxLengthRule('Record Number', 6),
-        ],
+        validationRules: [isLength({ min: 1, max: 6 })],
     },
     recordDate: {
         ...createFormFieldConfig(
@@ -48,9 +46,9 @@ export const formConfig = {
             true
         ),
         validationRules: [
-            requiredRule('Record Date'),
-            minLengthRule('Record Date', 8),
-            maxLengthRule('Record Date', 20),
+            isRequired(),
+            isLength({ min: 1, max: 12 }),
+            isDate(),
         ],
     },
     studentCondition: {
@@ -63,7 +61,7 @@ export const formConfig = {
             data.studentConditions,
             true
         ),
-        validationRules: [requiredRule('Student Condition')],
+        validationRules: [isRequired()],
     },
     courseName: {
         ...createFormFieldConfig(
@@ -75,7 +73,7 @@ export const formConfig = {
             data.courseName,
             true
         ),
-        validationRules: [requiredRule('Course Name')],
+        validationRules: [isRequired()],
     },
     subjectName: {
         ...createFormFieldConfig(
@@ -87,7 +85,7 @@ export const formConfig = {
             data.subjectName,
             true
         ),
-        validationRules: [requiredRule('Subject Name')],
+        validationRules: [isRequired()],
     },
     isAnulled: {
         ...createFormFieldConfig(
