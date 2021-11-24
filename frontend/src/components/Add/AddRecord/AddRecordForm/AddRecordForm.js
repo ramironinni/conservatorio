@@ -1,7 +1,4 @@
 import FormSubmitBtn from '../../../Forms/FormSubmitBtn/FormSubmitBtn';
-import FormCheck from '../../../Forms/FormCheck/FormCheck';
-import { useState } from 'react';
-import FormCol from '../../../Forms/FormCol';
 
 const AddRecordForm = ({ children, onSubmit, isFormValid }) => {
     return (

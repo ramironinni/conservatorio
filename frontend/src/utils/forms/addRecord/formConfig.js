@@ -1,14 +1,7 @@
 import { createFormFieldConfig } from '../createFormFieldConfig';
 import { data } from './data';
 
-import {
-    isRequired,
-    minLengthRule,
-    maxLengthRule,
-    isDate,
-    isLength,
-    isEmail,
-} from '../inputValidationRules';
+import { isRequired, isDate, isLength } from '../inputValidationRules';
 
 export const formConfig = {
     bookName: {
@@ -33,7 +26,7 @@ export const formConfig = {
             null,
             true
         ),
-        validationRules: [isLength({ min: 1, max: 6 })],
+        validationRules: [isRequired(), isLength({ min: 1, max: 6 })],
     },
     recordDate: {
         ...createFormFieldConfig(
