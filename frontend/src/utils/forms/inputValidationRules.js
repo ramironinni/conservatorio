@@ -27,9 +27,13 @@ export function isDate() {
 }
 
 export function isLength(config) {
-    return createValidationRule(
-        `It must contain between ${config.min} and ${config.max} characters`,
-        (inputValue, form) => validator.isLength(inputValue, config)
+    const message =
+        config.min === 0
+            ? `It cannot exceed ${config.max} characters`
+            : `It must contain between ${config.min} and ${config.max} characters`;
+
+    return createValidationRule(message, (inputValue, form) =>
+        validator.isLength(inputValue, config)
     );
 }
 

@@ -125,9 +125,9 @@ export const formConfig = {
             'input',
             'text',
             null,
-            true
+            false
         ),
-        validationRules: [isRequired(), isLength({ min: 1, max: 15 })],
+        validationRules: [isLength({ min: 0, max: 15 })],
     },
     apartment: {
         ...createFormFieldConfig(
@@ -137,9 +137,9 @@ export const formConfig = {
             'input',
             'text',
             null,
-            true
+            false
         ),
-        validationRules: [isRequired(), isLength({ min: 1, max: 15 })],
+        validationRules: [isLength({ min: 0, max: 15 })],
     },
     city: {
         ...createFormFieldConfig(
@@ -151,7 +151,7 @@ export const formConfig = {
             null,
             true
         ),
-        validationRules: [isRequired(), isLength({ min: 1, max: 15 })],
+        validationRules: [isRequired(), isLength({ min: 1, max: 50 })],
     },
     state: {
         ...createFormFieldConfig(
@@ -163,7 +163,7 @@ export const formConfig = {
             null,
             true
         ),
-        validationRules: [isRequired(), isLength({ min: 1, max: 15 })],
+        validationRules: [isRequired(), isLength({ min: 1, max: 50 })],
     },
     phone1CodeArea: {
         ...createFormFieldConfig(
@@ -197,9 +197,9 @@ export const formConfig = {
             'input',
             'text',
             null,
-            true
+            false
         ),
-        validationRules: [isRequired(), isLength({ min: 1, max: 15 })],
+        validationRules: [isLength({ min: 0, max: 15 })],
     },
     phone2Number: {
         ...createFormFieldConfig(
@@ -209,9 +209,9 @@ export const formConfig = {
             'input',
             'text',
             null,
-            true
+            false
         ),
-        validationRules: [isRequired(), isLength({ min: 1, max: 15 })],
+        validationRules: [isLength({ min: 0, max: 15 })],
     },
     profilePhoto: {
         ...createFormFieldConfig(
@@ -221,9 +221,9 @@ export const formConfig = {
             'input',
             'file',
             null,
-            true
+            false
         ),
-        validationRules: [isRequired()],
+        validationRules: [],
     },
     ...rolesCheckboxObj,
 };

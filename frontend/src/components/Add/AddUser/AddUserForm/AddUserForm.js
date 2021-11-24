@@ -7,7 +7,7 @@ const AddUserForm = ({ children, onSubmit, isFormValid }) => {
                 <h4>Main</h4>
                 {children}
             </div>
-            <FormSubmitBtn disabled={!isFormValid()}>Add User</FormSubmitBtn>
+            <FormSubmitBtn isFormValid={isFormValid}>Add User</FormSubmitBtn>
         </form>
     );
 };
