@@ -1,8 +1,5 @@
 import { useState } from 'react';
-import {
-    Redirect,
-    useLocation,
-} from 'react-router-dom/cjs/react-router-dom.min';
+import { Redirect, useLocation } from 'react-router-dom';
 import AddContent from '../AddContent/AddContent';
 import AddUserForm from './AddUserForm/AddUserForm';
 import useFetch from '../../../hooks/useFetch';
@@ -50,7 +47,6 @@ const AddUser = () => {
 
     const addNewUser = async (newUser) => {
         const applyData = (data) => {
-            console.log(data);
             setCreatedUser(data);
         };
 
