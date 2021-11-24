@@ -93,6 +93,10 @@ export const formConfig = {
         ),
         validationRules: [isRequired()],
     },
+    contact: {
+        ...createFormFieldConfig('contact', '', '', 'title', null, null, false),
+        validationRules: [],
+    },
     streetName: {
         ...createFormFieldConfig(
             'streetName',
@@ -216,13 +220,17 @@ export const formConfig = {
     profilePhoto: {
         ...createFormFieldConfig(
             'profilePhoto',
-            'md-9',
+            'md-12',
             data.prefix,
             'input',
             'file',
             null,
             false
         ),
+        validationRules: [],
+    },
+    roles: {
+        ...createFormFieldConfig('roles', '', '', 'title', null, null, false),
         validationRules: [],
     },
     ...rolesCheckboxObj,

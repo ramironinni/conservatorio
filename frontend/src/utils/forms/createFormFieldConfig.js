@@ -76,6 +76,14 @@ export const createFormFieldConfig = (
                 />
             );
         }
+
+        if (formField === 'title') {
+            return (
+                <h4 className="mt-5" key={label}>
+                    {label}
+                </h4>
+            );
+        }
     };
 
     return {
