@@ -11,6 +11,7 @@ function Checkbox({
     isValid,
     checked,
     size,
+    classNames,
     isRequired,
 }) {
     let classIsValid = '';
@@ -27,7 +28,7 @@ function Checkbox({
     const classSize = `col-${size}`;
 
     return (
-        <div className={`form-check ${classSize}`}>
+        <div className={`form-check ${classSize}  ${classNames && classNames}`}>
             <input
                 type={type}
                 id={id}

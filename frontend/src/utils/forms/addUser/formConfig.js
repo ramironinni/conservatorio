@@ -10,6 +10,7 @@ data.roles.forEach((role) => {
         ...createFormFieldConfig(
             `is${capitalizeWord(role.name)}`,
             'md-12',
+            null,
             data.prefix,
             'input',
             'checkbox',
@@ -25,6 +26,7 @@ export const formConfig = {
         ...createFormFieldConfig(
             'firstName',
             'md-6',
+            null,
             data.prefix,
             'input',
             'text',
@@ -37,6 +39,7 @@ export const formConfig = {
         ...createFormFieldConfig(
             'lastName',
             'md-6',
+            null,
             data.prefix,
             'input',
             'text',
@@ -49,6 +52,7 @@ export const formConfig = {
         ...createFormFieldConfig(
             'idNumber',
             'md-6',
+            null,
             data.prefix,
             'input',
             'text',
@@ -61,6 +65,7 @@ export const formConfig = {
         ...createFormFieldConfig(
             'dateOfBirth',
             'md-6',
+            null,
             data.prefix,
             'input',
             'date',
@@ -73,6 +78,7 @@ export const formConfig = {
         ...createFormFieldConfig(
             'gender',
             'md-6',
+            null,
             data.prefix,
             'select',
             null,
@@ -85,6 +91,7 @@ export const formConfig = {
         ...createFormFieldConfig(
             'nationality',
             'md-6',
+            null,
             data.prefix,
             'select',
             null,
@@ -101,6 +108,7 @@ export const formConfig = {
         ...createFormFieldConfig(
             'streetName',
             'md-6',
+            null,
             data.prefix,
             'input',
             'text',
@@ -113,6 +121,7 @@ export const formConfig = {
         ...createFormFieldConfig(
             'houseNumber',
             'md-6',
+            null,
             data.prefix,
             'input',
             'text',
@@ -125,6 +134,7 @@ export const formConfig = {
         ...createFormFieldConfig(
             'floor',
             'md-6',
+            null,
             data.prefix,
             'input',
             'text',
@@ -137,6 +147,7 @@ export const formConfig = {
         ...createFormFieldConfig(
             'apartment',
             'md-6',
+            null,
             data.prefix,
             'input',
             'text',
@@ -149,6 +160,7 @@ export const formConfig = {
         ...createFormFieldConfig(
             'city',
             'md-6',
+            null,
             data.prefix,
             'input',
             'text',
@@ -161,6 +173,7 @@ export const formConfig = {
         ...createFormFieldConfig(
             'state',
             'md-6',
+            null,
             data.prefix,
             'input',
             'text',
@@ -173,6 +186,7 @@ export const formConfig = {
         ...createFormFieldConfig(
             'phone1CodeArea',
             'md-3',
+            null,
             data.prefix,
             'input',
             'text',
@@ -185,6 +199,7 @@ export const formConfig = {
         ...createFormFieldConfig(
             'phone1Number',
             'md-9',
+            null,
             data.prefix,
             'input',
             'text',
@@ -197,6 +212,7 @@ export const formConfig = {
         ...createFormFieldConfig(
             'phone2CodeArea',
             'md-3',
+            null,
             data.prefix,
             'input',
             'text',
@@ -209,6 +225,7 @@ export const formConfig = {
         ...createFormFieldConfig(
             'phone2Number',
             'md-9',
+            null,
             data.prefix,
             'input',
             'text',
@@ -221,6 +238,7 @@ export const formConfig = {
         ...createFormFieldConfig(
             'profilePhoto',
             'md-12',
+            null,
             data.prefix,
             'input',
             'file',

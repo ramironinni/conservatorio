@@ -12,6 +12,7 @@ function Select({
     value,
     size,
     options,
+    classNames,
     isRequired,
 }) {
     let classIsValid = '';
@@ -28,7 +29,7 @@ function Select({
     const classSize = `col-${size}`;
 
     return (
-        <div className={classSize}>
+        <div className={`${classSize}  ${classNames && classNames}`}>
             <label htmlFor={id} className="form-label">
                 {label}
             </label>

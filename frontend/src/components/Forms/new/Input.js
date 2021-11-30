@@ -11,6 +11,7 @@ function Input({
     isValid,
     value,
     size,
+    classNames,
     isRequired,
 }) {
     let classIsValid = '';
@@ -26,11 +27,15 @@ function Input({
 
     const classSize = `col-${size}`;
 
+    const labelField = (
+        <label htmlFor={id} className="form-label">
+            {label}
+        </label>
+    );
+
     return (
-        <div className={classSize}>
-            <label htmlFor={id} className="form-label">
-                {label}
-            </label>
+        <div className={`${classSize} ${classNames && classNames}`}>
+            {classNames !== 'form-floating' ? labelField : ''}
             <input
                 id={id}
                 type={type}
@@ -40,6 +45,7 @@ function Input({
                 onBlur={handleBlur}
                 className={`form-control ${classIsValid}`}
             />
+            {classNames === 'form-floating' ? labelField : ''}
             <div className="invalid-feedback">{errorMessage}</div>
         </div>
     );

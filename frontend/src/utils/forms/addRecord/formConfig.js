@@ -8,6 +8,7 @@ export const formConfig = {
         ...createFormFieldConfig(
             'bookName',
             'md-4',
+            null,
             data.prefix,
             'select',
             null,
@@ -20,6 +21,7 @@ export const formConfig = {
         ...createFormFieldConfig(
             'recordNumber',
             'md-4',
+            null,
             data.prefix,
             'input',
             'text',
@@ -32,6 +34,7 @@ export const formConfig = {
         ...createFormFieldConfig(
             'recordDate',
             'md-4',
+            null,
             data.prefix,
             'input',
             'date',
@@ -48,6 +51,7 @@ export const formConfig = {
         ...createFormFieldConfig(
             'studentCondition',
             'md-4',
+            null,
             data.prefix,
             'select',
             null,
@@ -60,6 +64,7 @@ export const formConfig = {
         ...createFormFieldConfig(
             'courseName',
             'md-4',
+            null,
             data.prefix,
             'select',
             null,
@@ -72,6 +77,8 @@ export const formConfig = {
         ...createFormFieldConfig(
             'subjectName',
             'md-4',
+            null,
+
             data.prefix,
             'select',
             null,
@@ -84,6 +91,7 @@ export const formConfig = {
         ...createFormFieldConfig(
             'isAnulled',
             'md-12',
+            null,
             data.prefix,
             'input',
             'checkbox',

@@ -6,6 +6,7 @@ import camelCasedToText from '../camelCasedToText';
 export const createFormFieldConfig = (
     name,
     size,
+    classNames,
     idPrefix,
     formField,
     type,
@@ -34,6 +35,7 @@ export const createFormFieldConfig = (
                     handleBlur={handleBlur}
                     errorMessage={error}
                     size={size}
+                    classNames={classNames}
                     isRequired={isRequired}
                 />
             );
@@ -52,6 +54,7 @@ export const createFormFieldConfig = (
                     handleBlur={handleBlur}
                     errorMessage={error}
                     size={size}
+                    classNames={classNames}
                     isRequired={isRequired}
                 />
             );
@@ -72,6 +75,7 @@ export const createFormFieldConfig = (
                     errorMessage={error}
                     size={size}
                     options={options}
+                    classNames={classNames}
                     isRequired={isRequired}
                 />
             );
