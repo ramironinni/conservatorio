@@ -8,16 +8,16 @@ import Footer from './components/Footer/Footer';
 import AddRecord from './components/Add/AddRecord/AddRecord';
 import AddUser from './components/Add/AddUser/AddUser';
 import MainHeader from './components/MainHeader/MainHeader';
-import { useContext } from 'react';
-import AuthContext from './store/auth-context';
 import Login from './components/Login/Login';
 import UserProfile from './components/User/UserProfile';
 import UserConfiguration from './components/User/UserConfiguration';
+import { useSelector } from 'react-redux';
 
 function App() {
-    const authCtx = useContext(AuthContext);
+    // const authCtx = useContext(AuthContext);
+    const isLoggedIn = useSelector((state) => state.authentication.isLoggedIn);
 
-    if (!authCtx.isLoggedIn) {
+    if (!isLoggedIn) {
         return <Login />;
     }
 

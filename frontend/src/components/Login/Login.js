@@ -1,13 +1,14 @@
 import './Login.css';
 import logo from '../../assets/logo.png';
-import { useContext } from 'react';
-import AuthContext from '../../store/auth-context';
 import getCurrentYear from '../../utils/getCurrentYear';
 import useForm from '../../hooks/useForm';
 import { formConfig } from '../../utils/forms/login/formConfig';
 
+import { useDispatch } from 'react-redux';
+import { authActions } from '../../store/index';
+
 const Login = () => {
-    const authCtx = useContext(AuthContext);
+    const dispatch = useDispatch();
 
     const { renderFormFields, isFormValid } = useForm(formConfig);
 
@@ -15,7 +16,12 @@ const Login = () => {
         e.preventDefault();
 
         if (isFormValid) {
-            authCtx.onLogin(e.target.email.value, e.target.password.value);
+            dispatch(
+                authActions.login({
+                    email: e.target.email.value,
+                    password: e.target.password.value,
+                })
+            );
         }
     };
 

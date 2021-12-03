@@ -1,11 +1,17 @@
-import { useContext } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import logo from '../../../assets/logo.png';
-import AuthContext from '../../../store/auth-context';
+import { authActions } from '../../../store';
 import './NavBar.css';
 import NavItemDropdown from './NavItemDropdown/NavItemDropdown';
 
 const NavBar = () => {
+    const isLoggedIn = useSelector((state) => state.authentication.isLoggedIn);
+
+    console.log('isLoggedIn', isLoggedIn);
+    const email = useSelector((state) => state.authentication.email);
+    const dispatch = useDispatch();
+
     const items = [
         'student',
         'professor',
@@ -16,7 +22,9 @@ const NavBar = () => {
         'librarian',
     ];
 
-    const authCtx = useContext(AuthContext);
+    const logoutHandler = () => {
+        dispatch(authActions.logout());
+    };
 
     return (
         <nav className="navbar navbar-expand-sm navbar-dark bg-dark">
@@ -63,7 +71,7 @@ const NavBar = () => {
                         />
                     </ul>
                     <ul className="navbar-nav ms-auto mb-2 mb-lg-0">
-                        {authCtx.isLoggedIn && (
+                        {isLoggedIn && (
                             <div className="btn-group">
                                 <button
                                     type="button"
@@ -72,7 +80,7 @@ const NavBar = () => {
                                     aria-expanded="false"
                                 >
                                     <i className="bi bi-person-fill"></i>&nbsp;
-                                    {authCtx.user.email}
+                                    {email}
                                 </button>
                                 <ul className="dropdown-menu dropdown-menu-end">
                                     <li>
@@ -96,7 +104,7 @@ const NavBar = () => {
                                         <button
                                             className="dropdown-item"
                                             type="button"
-                                            onClick={authCtx.onLogout}
+                                            onClick={logoutHandler}
                                         >
                                             Logout
                                         </button>
