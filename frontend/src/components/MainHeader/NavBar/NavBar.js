@@ -1,14 +1,13 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import logo from '../../../assets/logo.png';
-import { authActions } from '../../../store';
+import { authActions } from '../../../store/auth';
 import './NavBar.css';
 import NavItemDropdown from './NavItemDropdown/NavItemDropdown';
 
 const NavBar = () => {
     const isLoggedIn = useSelector((state) => state.authentication.isLoggedIn);
 
-    console.log('isLoggedIn', isLoggedIn);
     const email = useSelector((state) => state.authentication.email);
     const dispatch = useDispatch();
 

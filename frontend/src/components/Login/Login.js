@@ -5,7 +5,7 @@ import useForm from '../../hooks/useForm';
 import { formConfig } from '../../utils/forms/login/formConfig';
 
 import { useDispatch } from 'react-redux';
-import { authActions } from '../../store/index';
+import { authActions } from '../../store/auth';
 
 const Login = () => {
     const dispatch = useDispatch();
