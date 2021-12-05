@@ -1,4 +1,4 @@
-import Modal from '../shared/Modal/Modal';
+import Modal from '../../components/shared/Modal/Modal';
 
 const DetailsButtonGroup = ({ onEditUser, onDeleteUser }) => {
     return (

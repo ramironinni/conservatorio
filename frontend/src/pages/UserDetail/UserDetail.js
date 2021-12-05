@@ -4,7 +4,7 @@ import { useState } from 'react/cjs/react.development';
 import useFetch from '../../hooks/useFetch';
 import ErrorFetchingData from '../Search/ErrorFetchingData/ErrorFetchingData';
 import Pending from '../Search/Pending/Pending';
-import AlertDismissible from '../shared/Modal/AlertDismissible';
+import AlertDismissible from '../../components/shared/Modal/AlertDismissible';
 import DetailsButtonGroup from './DetailsButtonGroup';
 import UserDetailField from './UserDetailField';
 

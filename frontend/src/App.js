@@ -1,16 +1,16 @@
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
-import Home from './components/Home/Home';
+import Home from './pages/Home/Home';
 import NotFound from './components/NotFound/NotFound';
-import Search from './components/Search/Search';
-import UserDetail from './components/UserDetail/UserDetail';
+import Search from './pages/Search/Search';
+import UserDetail from './pages/UserDetail/UserDetail';
 import Footer from './components/Footer/Footer';
-import AddRecord from './components/Add/AddRecord/AddRecord';
-import AddUser from './components/Add/AddUser/AddUser';
+import AddRecord from './pages/Add/AddRecord/AddRecord';
+import AddUser from './pages/Add/AddUser/AddUser';
 import MainHeader from './components/MainHeader/MainHeader';
-import Login from './components/Login/Login';
-import UserProfile from './components/User/UserProfile';
-import UserConfiguration from './components/User/UserConfiguration';
+import Login from './pages/Login/Login';
+import UserProfile from './pages/User/UserProfile';
+import UserConfiguration from './pages/User/UserConfiguration';
 import { useSelector } from 'react-redux';
 
 function App() {
@@ -39,14 +39,14 @@ function App() {
                         <Route path="/add/user" exact>
                             <AddUser />
                         </Route>
+                        <Route path="/add/record" exact>
+                            <AddRecord />
+                        </Route>
                         <Route path="/user/profile" exact>
                             <UserProfile />
                         </Route>
                         <Route path="/user/configuration" exact>
                             <UserConfiguration />
-                        </Route>
-                        <Route path="/add/record" exact>
-                            <AddRecord />
                         </Route>
                         <Route path="*">
                             <NotFound />

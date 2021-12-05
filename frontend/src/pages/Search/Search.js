@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import ResultsList from './ResultsList/ResultsList';
 import Pending from './Pending/Pending';
 import ErrorFetchingData from './ErrorFetchingData/ErrorFetchingData';
-import AlertDismissible from '../shared/Modal/AlertDismissible';
+import AlertDismissible from '../../components/shared/Modal/AlertDismissible';
 import { useLocation } from 'react-router-dom/cjs/react-router-dom.min';
 
 const Search = () => {

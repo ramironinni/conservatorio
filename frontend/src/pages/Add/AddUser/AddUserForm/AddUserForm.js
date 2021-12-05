@@ -1,4 +1,4 @@
-import FormSubmitBtn from '../../../Forms/FormSubmitBtn/FormSubmitBtn';
+import FormSubmitBtn from '../../../../components/Forms/FormSubmitBtn/FormSubmitBtn';
 
 const AddUserForm = ({ children, onSubmit, isFormValid }) => {
     return (
