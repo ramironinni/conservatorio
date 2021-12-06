@@ -2,13 +2,13 @@ import { useDispatch, useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import logo from '../../../assets/logo.png';
 import { authActions } from '../../../store/auth';
+import MainMenu from './MainMenu';
 import './NavBar.css';
-import NavItemDropdown from './NavItemDropdown/NavItemDropdown';
+import UserMenu from './UserMenu';
 
 const NavBar = () => {
     const isLoggedIn = useSelector((state) => state.authentication.isLoggedIn);
 
-    const email = useSelector((state) => state.authentication.email);
     const dispatch = useDispatch();
 
     const items = [
@@ -47,71 +47,8 @@ const NavBar = () => {
                     <span className="navbar-toggler-icon"></span>
                 </button>
                 <div className="collapse navbar-collapse" id="navbar-main">
-                    <ul className="navbar-nav me-auto mb-2 mb-lg-0">
-                        <li className="nav-item">
-                            <NavLink
-                                className="nav-link"
-                                aria-current="page"
-                                to="/"
-                                exact
-                            >
-                                Home
-                            </NavLink>
-                        </li>
-                        <NavItemDropdown
-                            title="Search"
-                            items={items}
-                            action="search"
-                        />
-                        <NavItemDropdown
-                            title="Add"
-                            items={['user', 'record']}
-                            action="add"
-                        />
-                    </ul>
-                    <ul className="navbar-nav ms-auto mb-2 mb-lg-0">
-                        {isLoggedIn && (
-                            <div className="btn-group">
-                                <button
-                                    type="button"
-                                    className="btn btn-dark dropdown-toggle"
-                                    data-bs-toggle="dropdown"
-                                    aria-expanded="false"
-                                >
-                                    <i className="bi bi-person-fill"></i>&nbsp;
-                                    {email}
-                                </button>
-                                <ul className="dropdown-menu dropdown-menu-end">
-                                    <li>
-                                        <NavLink
-                                            className="dropdown-item"
-                                            to="/user/profile"
-                                        >
-                                            Profile
-                                        </NavLink>
-                                    </li>
-                                    <li>
-                                        <NavLink
-                                            className="dropdown-item"
-                                            to="/user/configuration"
-                                        >
-                                            Configuration
-                                        </NavLink>
-                                    </li>
-
-                                    <li>
-                                        <button
-                                            className="dropdown-item"
-                                            type="button"
-                                            onClick={logoutHandler}
-                                        >
-                                            Logout
-                                        </button>
-                                    </li>
-                                </ul>
-                            </div>
-                        )}
-                    </ul>
+                    <MainMenu items={items} />
+                    {isLoggedIn && <UserMenu onLogout={logoutHandler} />}
                 </div>
             </div>
         </nav>
