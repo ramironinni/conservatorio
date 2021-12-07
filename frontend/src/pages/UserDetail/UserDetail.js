@@ -10,6 +10,7 @@ import UserDetailField from './UserDetailField';
 
 const UserDetail = () => {
     const location = useLocation();
+
     const { id } = useParams();
 
     const [user, setUser] = useState();

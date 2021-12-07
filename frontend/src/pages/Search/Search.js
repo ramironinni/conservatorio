@@ -69,7 +69,7 @@ const Search = () => {
     }, [query, data, order]);
 
     const changeSortingHandler = (e) => {
-        history.push(`/search?sort=${e.target.id}`);
+        history.push(`${location.pathname}?sort=${e.target.id}`);
     };
 
     let userDeletedAlert = '';
