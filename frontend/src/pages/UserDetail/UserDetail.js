@@ -44,7 +44,12 @@ const UserDetail = () => {
 
     let userCreatedAlert = '';
 
-    if (location.state && location.state.referrer.pathname === '/add/user') {
+    // if (location.state && location.state.referrer.pathname === '/add/user') {
+
+    const queryParams = new URLSearchParams(location.search);
+    const userCreated = queryParams.get('user-created');
+
+    if (userCreated) {
         userCreatedAlert = (
             <AlertDismissible
                 type="success"
