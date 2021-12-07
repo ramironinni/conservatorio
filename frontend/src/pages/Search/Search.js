@@ -5,10 +5,13 @@ import ResultsList from './ResultsList/ResultsList';
 import Pending from './Pending/Pending';
 import ErrorFetchingData from './ErrorFetchingData/ErrorFetchingData';
 import AlertDismissible from '../../components/shared/Modal/AlertDismissible';
-import { useLocation } from 'react-router-dom/cjs/react-router-dom.min';
+import { useLocation, useHistory } from 'react-router-dom';
+import SortGroup from './SortGroup';
+import sortList from '../../utils/sortList';
 
 const Search = () => {
     const location = useLocation();
+    const history = useHistory();
 
     const [data, setData] = useState();
     const [query, setQuery] = useState('');
@@ -28,37 +31,46 @@ const Search = () => {
         setQuery(inputQuery.toLowerCase());
     };
 
-    // const [filteredUsers, setFilteredUsers] = useState([]);
+    const [filteredUsers, setFilteredUsers] = useState([]);
 
-    // useEffect(() => {
-    //     const updateFilteredUsers = () => {
-    //         if (query === '') {
-    //             return setFilteredUsers([]);
-    //         }
+    const queryParams = new URLSearchParams(location.search);
 
-    //         const newFilteredUsers = data.filter((user) => {
-    //             const checkedFields = [
-    //                 user.firstName.toLowerCase(),
-    //                 user.lastName.toLowerCase(),
-    //                 // user.location.city.toLowerCase(),
-    //             ].map((field) => field.includes(query));
+    const order = queryParams.get('sort') || 'newest';
 
-    //             const foundUser = checkedFields.some((field) => field);
+    useEffect(() => {
+        const updateFilteredUsers = () => {
+            if (query === '') {
+                return setFilteredUsers([]);
+            }
 
-    //             return foundUser;
-    //         });
+            const newFilteredUsers = data.filter((user) => {
+                const checkedFields = [
+                    user.firstName.toLowerCase(),
+                    user.lastName.toLowerCase(),
+                    // user.location.city.toLowerCase(),
+                ].map((field) => field.includes(query));
 
-    //         setFilteredUsers(newFilteredUsers);
-    //     };
+                const foundUsers = checkedFields.some((field) => field);
 
-    //     const identifier = setTimeout(() => {
-    //         updateFilteredUsers();
-    //     }, 500);
+                return foundUsers;
+            });
+            const newFilteredAndOrderdUsers = sortList(newFilteredUsers, order);
 
-    //     return () => {
-    //         clearTimeout(identifier);
-    //     };
-    // }, [query, data]);
+            setFilteredUsers(newFilteredAndOrderdUsers);
+        };
+
+        const identifier = setTimeout(() => {
+            updateFilteredUsers();
+        }, 500);
+
+        return () => {
+            clearTimeout(identifier);
+        };
+    }, [query, data, order]);
+
+    const changeSortingHandler = (e) => {
+        history.push(`/search?sort=${e.target.id}`);
+    };
 
     let userDeletedAlert = '';
 
@@ -78,8 +90,13 @@ const Search = () => {
     }
 
     if (data) {
-        console.log(data);
-        // content = <ResultsList filteredUsers={filteredUsers} query={query} />;
+        // console.log(data);
+        content = (
+            <div className="row justify-content-center">
+                <SortGroup onClick={changeSortingHandler} />
+                <ResultsList filteredUsers={filteredUsers} query={query} />
+            </div>
+        );
     }
 
     if (error) {

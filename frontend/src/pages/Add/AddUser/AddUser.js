@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Redirect, useLocation } from 'react-router-dom';
 import AddContent from '../AddContent/AddContent';
 import AddUserForm from './AddUserForm/AddUserForm';
@@ -7,9 +7,11 @@ import Pending from '../../Search/Pending/Pending';
 import ErrorFetchingData from '../../Search/ErrorFetchingData/ErrorFetchingData';
 import useForm from '../../../hooks/useForm';
 import { formConfig } from '../../../utils/forms/addUser/formConfig';
+import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
 
 const AddUser = () => {
     const location = useLocation();
+    const history = useHistory();
 
     const [createdUser, setCreatedUser] = useState(null);
 
@@ -17,13 +19,13 @@ const AddUser = () => {
 
     const { isPending, error, sendRequest: saveUser } = useFetch();
 
-    const submitHandler = (e) => {
+    const submitHandler = async (e) => {
         e.preventDefault();
 
         if (isFormValid()) {
             const form = e.target;
 
-            addNewUser({
+            await addNewUser({
                 firstName: form.firstName.value,
                 lastName: form.lastName.value,
                 idNumber: form.idNumber.value,
@@ -45,12 +47,20 @@ const AddUser = () => {
         }
     };
 
+    useEffect(() => {
+        if (createdUser) {
+            history.push(
+                `/search/users/id/${createdUser._id}?user-created=true`
+            );
+        }
+    }, [createdUser, history]);
+
     const addNewUser = async (newUser) => {
         const applyData = (data) => {
             setCreatedUser(data);
         };
 
-        saveUser(
+        await saveUser(
             'http://localhost:5000/api/users/create',
             {
                 method: 'POST',
@@ -64,14 +74,15 @@ const AddUser = () => {
     };
 
     if (createdUser) {
-        return (
-            <Redirect
-                to={{
-                    pathname: `/search/users/id/${createdUser._id}`,
-                    state: { referrer: location },
-                }}
-            />
-        );
+        // return (
+        //     <Redirect
+        //         to={{
+        //             pathname: `/search/users/id/${createdUser._id}`,
+        //             state: { referrer: location },
+        //         }}
+        //     />
+        // );
+        // history.push(`/search/users/id/${createdUser._id}`);
     }
 
     let content = (

@@ -12,6 +12,7 @@ const ResultsList = ({ filteredUsers, query }) => {
                 <UserCard
                     name={user.firstName}
                     last={user.lastName}
+                    created={user.createdAt}
                     // img={user.picture.thumbnail}
                     user={user}
                     key={i}

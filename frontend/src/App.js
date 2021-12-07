@@ -33,7 +33,8 @@ function App() {
                         <Route path="/search/users/id/:id" exact>
                             <UserDetail />
                         </Route>
-                        <Route path="/search/:type" exact>
+                        {/* <Route path="/search/:type" exact> */}
+                        <Route path="/search" exact>
                             <Search />
                         </Route>
                         <Route path="/add/user" exact>
