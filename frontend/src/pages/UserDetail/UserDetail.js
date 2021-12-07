@@ -2,11 +2,11 @@ import { useEffect } from 'react';
 import { useParams, useLocation } from 'react-router-dom';
 import { useState } from 'react/cjs/react.development';
 import useFetch from '../../hooks/useFetch';
-import ErrorFetchingData from '../Search/ErrorFetchingData/ErrorFetchingData';
-import Pending from '../Search/Pending/Pending';
+import ErrorFetchingData from '../../components/shared/ErrorFetchingData/ErrorFetchingData';
 import AlertDismissible from '../../components/shared/Modal/AlertDismissible';
 import DetailsButtonGroup from './DetailsButtonGroup';
 import UserDetailField from './UserDetailField';
+import Pending from '../../components/shared/Pending/Pending';
 
 const UserDetail = () => {
     const location = useLocation();

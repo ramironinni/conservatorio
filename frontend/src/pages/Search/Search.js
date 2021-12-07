@@ -2,12 +2,12 @@ import SearchBar from './SearchBar/SearchBar';
 import useFetch from '../../hooks/useFetch';
 import { useEffect, useState } from 'react';
 import ResultsList from './ResultsList/ResultsList';
-import Pending from './Pending/Pending';
-import ErrorFetchingData from './ErrorFetchingData/ErrorFetchingData';
+import ErrorFetchingData from '../../components/shared/ErrorFetchingData/ErrorFetchingData';
 import AlertDismissible from '../../components/shared/Modal/AlertDismissible';
 import { useLocation, useHistory } from 'react-router-dom';
 import SortGroup from './SortGroup';
 import sortList from '../../utils/sortList';
+import Pending from '../../components/shared/Pending/Pending';
 
 const Search = () => {
     const location = useLocation();
