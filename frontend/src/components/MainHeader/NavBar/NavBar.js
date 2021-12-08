@@ -11,16 +11,6 @@ const NavBar = () => {
 
     const dispatch = useDispatch();
 
-    const items = [
-        'student',
-        'professor',
-        'record',
-        'preceptor',
-        'principal',
-        'janitor',
-        'librarian',
-    ];
-
     const logoutHandler = () => {
         dispatch(authActions.logout());
     };
@@ -47,7 +37,7 @@ const NavBar = () => {
                     <span className="navbar-toggler-icon"></span>
                 </button>
                 <div className="collapse navbar-collapse" id="navbar-main">
-                    <MainMenu items={items} />
+                    <MainMenu />
                     {isLoggedIn && <UserMenu onLogout={logoutHandler} />}
                 </div>
             </div>

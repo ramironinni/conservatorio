@@ -1,7 +1,7 @@
 import { NavLink } from 'react-router-dom';
 import NavItemDropdown from './NavItemDropdown/NavItemDropdown';
 
-const MainMenu = ({ items }) => {
+const MainMenu = () => {
     return (
         <ul className="navbar-nav me-auto mb-2 mb-lg-0">
             <li className="nav-item">
@@ -9,7 +9,17 @@ const MainMenu = ({ items }) => {
                     Home
                 </NavLink>
             </li>
-            <NavItemDropdown title="Search" items={items} action="search" />
+            <li className="nav-item">
+                <NavLink
+                    className="nav-link"
+                    aria-current="page"
+                    to="/search"
+                    exact
+                >
+                    Search
+                </NavLink>
+            </li>
+
             <NavItemDropdown
                 title="Add"
                 items={['user', 'record']}
