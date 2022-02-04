@@ -5,7 +5,7 @@ function useForm(formObj) {
 
     function renderFormFields() {
         return Object.values(form).map((inputObj) => {
-            const { value, label, errorMessage, valid, renderField } = inputObj;
+            const { renderField, value, valid, errorMessage, label } = inputObj;
 
             return renderField(
                 inputChangeHandler,
@@ -25,6 +25,7 @@ function useForm(formObj) {
             }
             for (const rule of inputField.validationRules) {
                 if (!rule.validate(inputField.value, form)) {
+                    //TO DO check it
                     inputField.errorMessage = rule.message;
                     return false;
                 }

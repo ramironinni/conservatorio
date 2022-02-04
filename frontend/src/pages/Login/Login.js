@@ -32,7 +32,7 @@ const Login = () => {
                     <img
                         className="mb-4 rounded"
                         src={logo}
-                        alt=""
+                        alt="logo"
                         width="57"
                         height="57"
                     />

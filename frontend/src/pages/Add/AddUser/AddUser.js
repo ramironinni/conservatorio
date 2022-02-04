@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useLocation } from 'react-router-dom';
+// import { useLocation } from 'react-router-dom';
 import AddContent from '../AddContent/AddContent';
 import AddUserForm from './AddUserForm/AddUserForm';
 import useFetch from '../../../hooks/useFetch';
@@ -10,7 +10,7 @@ import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
 import Pending from '../../../components/shared/Pending/Pending';
 
 const AddUser = () => {
-    const location = useLocation();
+    // const location = useLocation();
     const history = useHistory();
 
     const [createdUser, setCreatedUser] = useState(null);
@@ -72,18 +72,6 @@ const AddUser = () => {
             applyData
         );
     };
-
-    if (createdUser) {
-        // return (
-        //     <Redirect
-        //         to={{
-        //             pathname: `/search/users/id/${createdUser._id}`,
-        //             state: { referrer: location },
-        //         }}
-        //     />
-        // );
-        // history.push(`/search/users/id/${createdUser._id}`);
-    }
 
     let content = (
         <div className="container add-user-container">

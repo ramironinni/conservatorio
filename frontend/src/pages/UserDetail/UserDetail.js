@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { useParams, useLocation } from 'react-router-dom';
+import { useParams, useLocation, useHistory } from 'react-router-dom';
 import { useState } from 'react/cjs/react.development';
 import useFetch from '../../hooks/useFetch';
 import ErrorFetchingData from '../../components/shared/ErrorFetchingData/ErrorFetchingData';
@@ -10,11 +10,12 @@ import Pending from '../../components/shared/Pending/Pending';
 
 const UserDetail = () => {
     const location = useLocation();
+    const history = useHistory();
 
     const { id } = useParams();
 
     const [user, setUser] = useState();
-    const [deletedUser, setDeletedUser] = useState();
+    // const [deletedUser, setDeletedUser] = useState();
     const [url, setUrl] = useState(`http://localhost:5000/api/users/id/${id}`);
     const [config, setConfig] = useState(null);
 
@@ -25,8 +26,9 @@ const UserDetail = () => {
             if (!config) {
                 setUser(data.user);
             }
-            if (config) {
-                setDeletedUser(true);
+            if (config && config.method === 'DELETE') {
+                // setDeletedUser(true);
+                history.push('/delete-confirmation?type=user');
             }
         };
 
@@ -48,6 +50,10 @@ const UserDetail = () => {
 
     const queryParams = new URLSearchParams(location.search);
     const userCreated = queryParams.get('user-created');
+
+    console.log('location.search', location.search);
+    console.log('queryParams', queryParams);
+    console.log('userCreated', userCreated);
 
     if (userCreated) {
         userCreatedAlert = (
@@ -91,14 +97,14 @@ const UserDetail = () => {
         );
     }
 
-    if (deletedUser) {
-        content = (
-            <AlertDismissible
-                type="success"
-                text="User successfully deleted!"
-            />
-        );
-    }
+    // if (deletedUser) {
+    //     content = (
+    //         <AlertDismissible
+    //             type="success"
+    //             text="User successfully deleted!"
+    //         />
+    //     );
+    // }
 
     if (error) {
         content = <ErrorFetchingData error={error} />;

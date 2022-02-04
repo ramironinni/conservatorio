@@ -92,11 +92,11 @@ export const createFormFieldConfig = (
 
     return {
         renderField,
-        label,
         value,
         valid: isRequired ? null : true,
-        isRequired,
         errorMessage: '',
+        label,
+        isRequired,
         touched: false,
     };
 };

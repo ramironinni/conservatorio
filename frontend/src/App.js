@@ -16,6 +16,7 @@ import React, { Suspense } from 'react';
 
 import { useSelector } from 'react-redux';
 import Pending from './components/shared/Pending/Pending';
+import DeleteConfirmation from './pages/DeleteConfirmation/DeleteConfirmation';
 
 const Login = React.lazy(() => import('./pages/Login/Login'));
 const MainHeader = React.lazy(() =>
@@ -73,6 +74,9 @@ function App() {
                             </Route>
                             <Route path="/user/configuration" exact>
                                 <UserConfiguration />
+                            </Route>
+                            <Route path="/delete-confirmation" exact>
+                                <DeleteConfirmation />
                             </Route>
                             <Route path="*">
                                 <NotFound />
