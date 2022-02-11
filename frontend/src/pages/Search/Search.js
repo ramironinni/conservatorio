@@ -73,7 +73,6 @@ const Search = () => {
             pathname: location.pathname,
             search: `?sort=${e.target.id}`,
         });
-        // history.push(`${location.pathname}<?sort=${e.target.id}`);
     };
 
     let userDeletedAlert = '';
@@ -94,7 +93,6 @@ const Search = () => {
     }
 
     if (data) {
-        // console.log(data);
         content = (
             <div className="row justify-content-center">
                 <SortGroup onClick={changeSortingHandler} />
