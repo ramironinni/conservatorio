@@ -38,7 +38,7 @@ const usersController = {
 
         try {
             const createdUser = await user.save();
-            res.send(createdUser);
+            res.json(createdUser);
         } catch (error) {
             console.log(error);
         }
@@ -49,7 +49,7 @@ const usersController = {
         try {
             const deletedUser = await User.findByIdAndDelete(id);
             console.log('user deleted');
-            res.send(deletedUser);
+            res.json(deletedUser);
         } catch (error) {
             console.log(error);
         }

@@ -28,6 +28,7 @@ mongoose
 app.use(cors());
 
 // ----- MIDDLEWARES -----
+// Used to parse JSON bodies (former body-parser)
 app.use(express.json());
 
 // ROUTES
