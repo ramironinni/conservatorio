@@ -1,6 +1,8 @@
 const User = require('../models/user');
 const HttpError = require('../models/http-error');
 
+const { validationResult } = require('express-validator');
+
 const usersController = {
     listAll: async (req, res, next) => {
         try {
@@ -42,14 +44,20 @@ const usersController = {
         }
     },
     create: async (req, res, next) => {
-        const { firstName, lastName } = req.body;
-
-        const user = new User({
-            firstName,
-            lastName,
-        });
-
         try {
+            const errors = validationResult(req);
+
+            if (errors.errors.length !== 0) {
+                throw new HttpError('Invalid inputs', 422);
+            }
+
+            const { firstName, lastName } = req.body;
+
+            const user = new User({
+                firstName,
+                lastName,
+            });
+
             const createdUser = await user.save();
             res.status(201).json(createdUser);
         } catch (error) {
