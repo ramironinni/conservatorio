@@ -6,6 +6,7 @@ const cors = require('cors');
 
 // require routes
 const usersRouter = require('./routes/users');
+const HttpError = require('./models/http-error');
 
 // instantiate express
 const app = express();
@@ -33,3 +34,18 @@ app.use(express.json());
 
 // ROUTES
 app.use('/api/users', usersRouter);
+
+app.use((req, res, next) => {
+    const error = new HttpError('Could not find this route', 404);
+    throw error;
+});
+
+app.use((error, req, res, next) => {
+    if (res.headerSent) {
+        return next(error);
+    }
+
+    res.status(error.code || 500);
+    res.json({ message: error.message || 'An unknown error ocurred!' });
+    // res.json({ message: error.message || 'An unknown error ocurred!' });
+});
