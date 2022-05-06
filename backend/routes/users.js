@@ -4,9 +4,9 @@ const { check } = require('express-validator');
 
 const usersController = require('../controllers/users');
 
-router.get('/', usersController.listAll);
+router.get('/', usersController.getAll);
 router.get('/search/:query', usersController.listFiltered);
-router.get('/id/:id', usersController.listOne);
+router.get('/id/:id', usersController.getById);
 router.post(
     '/create',
     [
@@ -15,8 +15,8 @@ router.post(
     ],
     usersController.create
 );
-router.delete('/delete/:id', usersController.delete);
-router.patch('/update/:id', usersController.update);
+router.delete('/delete/:id', usersController.deleteById);
+router.patch('/update/:id', usersController.updateById);
 router.post('/login', usersController.login);
 
 module.exports = router;

@@ -16,6 +16,7 @@ dotenv.config();
 
 // connect to MongoDB
 const dbURI = `mongodb+srv://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@cluster0.m3iwz.mongodb.net/conservatorioDB?retryWrites=true&w=majority`;
+
 mongoose
     .connect(dbURI)
     .then((result) => {

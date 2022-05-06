@@ -4,78 +4,109 @@ const HttpError = require('../models/http-error');
 const { validationResult } = require('express-validator');
 
 const usersController = {
-    listAll: async (req, res, next) => {
+    getAll: async (req, res, next) => {
+        let users;
+
         try {
-            const usersList = await User.find();
-            res.json(usersList);
-        } catch (error) {
-            next(error);
+            users = await User.find();
+        } catch (err) {
+            const error = new HttpError(
+                'Something went wrong, could not find all the users',
+                500
+            );
+            return next(error);
         }
+
+        if (!users) {
+            const error = new HttpError('Could not find the users', 404);
+            return next(error);
+        }
+
+        res.json(users);
     },
     listFiltered: async (req, res) => {},
-    listOne: async (req, res, next) => {
+    getById: async (req, res, next) => {
+        let user;
+
         try {
-            const foundUser = await User.findById(req.params.id);
-
-            // if (!foundUser) {
-            //     return res.status(404).json({ message: 'User not found' });
-            // }
-
-            const data = {
-                createdAt: foundUser.createdAt,
-                updatedAt: foundUser.updatedAt,
-                user: {
-                    id: foundUser._id,
-                    firstName: foundUser.firstName,
-                    lastName: foundUser.lastName,
-                },
-            };
-
-            res.json(data);
-        } catch (error) {
-            // return res.status(404).json({ message: 'ERROR' });
-            // next(
-            //     throw new HttpError(
-            //         'Could not find a user for the provided id',
-            //         404
-            //     )
-            // );
-            next(error);
+            user = await User.findById(req.params.id);
+        } catch (err) {
+            const error = new HttpError(
+                'Something went wrong, could not find a user',
+                500
+            );
+            return next(error);
         }
+
+        if (!user) {
+            const error = new HttpError(
+                'Could not find a user for the provided id',
+                404
+            );
+            return next(error);
+        }
+
+        res.json({ user: user.toObject({ getters: true }) });
     },
     create: async (req, res, next) => {
+        const errors = validationResult(req);
+
+        if (errors.errors.length !== 0) {
+            return next(new HttpError('Invalid inputs', 422));
+        }
+
+        const { firstName, lastName } = req.body;
+
+        let createdUser;
+
         try {
-            const errors = validationResult(req);
-
-            if (errors.errors.length !== 0) {
-                throw new HttpError('Invalid inputs', 422);
-            }
-
-            const { firstName, lastName } = req.body;
-
             const user = new User({
                 firstName,
                 lastName,
             });
 
-            const createdUser = await user.save();
-            res.status(201).json(createdUser);
-        } catch (error) {
-            next(error);
+            createdUser = await user.save();
+        } catch (err) {
+            const error = new HttpError(
+                'Something went wrong, could not create a new user',
+                404
+            );
+            return next(error);
         }
+
+        if (!createdUser) {
+            const error = new HttpError(
+                'Something went wrong, could not create a new user',
+                500
+            );
+            return next(error);
+        }
+
+        res.status(201).json(createdUser);
     },
-    delete: async (req, res, next) => {
+    deleteById: async (req, res, next) => {
         const id = req.params.id;
 
+        let deletedUser;
+
         try {
-            const deletedUser = await User.findByIdAndDelete(id);
-            // res.status(200).json(deletedUser);
-            res.status(200).json({ message: 'User has been deleted' });
-        } catch (error) {
-            next(error);
+            deletedUser = await User.findByIdAndDelete(id);
+        } catch (err) {
+            const error = new HttpError(
+                'Something went wrong, could not delete the user',
+                404
+            );
+            return next(error);
         }
+
+        if (!deletedUser) {
+            const error = new HttpError('Something went wrong', 500);
+            return next(error);
+        }
+
+        res.status(200).json({ message: 'User has been deleted' });
     },
-    update: (req, res) => {
+    updateById: (req, res) => {
         const { firstName, lastName } = req.body;
         const userId = req.params.id;
 
