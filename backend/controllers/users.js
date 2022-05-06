@@ -24,7 +24,33 @@ const usersController = {
 
         res.json(users);
     },
-    listFiltered: async (req, res) => {},
+    getByQuery: async (req, res, next) => {
+        const query = new RegExp(req.params.query, 'gi');
+
+        let users;
+
+        try {
+            users = await User.find({
+                $or: [{ firstName: query }, { lastName: query }],
+            });
+        } catch (err) {
+            const error = new HttpError(
+                'Something went wrong, could not find a user using the provided query',
+                500
+            );
+            return next(error);
+        }
+
+        if (!users || users.length === 0) {
+            const error = new HttpError(
+                'Could not find a user for the provided query',
+                404
+            );
+            return next(error);
+        }
+
+        res.json(users);
+    },
     getById: async (req, res, next) => {
         let user;
 
@@ -106,7 +132,7 @@ const usersController = {
 
         res.status(200).json({ message: 'User has been deleted' });
     },
-    updateById: (req, res) => {
+    updateById: (req, res, next) => {
         const { firstName, lastName } = req.body;
         const userId = req.params.id;
 

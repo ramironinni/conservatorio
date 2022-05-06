@@ -5,7 +5,7 @@ const { check } = require('express-validator');
 const usersController = require('../controllers/users');
 
 router.get('/', usersController.getAll);
-router.get('/search/:query', usersController.listFiltered);
+router.get('/search/:query', usersController.getByQuery);
 router.get('/id/:id', usersController.getById);
 router.post(
     '/create',
