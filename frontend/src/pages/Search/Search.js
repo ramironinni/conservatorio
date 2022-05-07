@@ -13,66 +13,85 @@ const Search = () => {
     const location = useLocation();
     const history = useHistory();
 
+    const [initialRender, setInitialRender] = useState(true);
     const [data, setData] = useState();
     const [query, setQuery] = useState('');
+    const [userInput, setUserInput] = useState('');
+    const [resultsOrder, setResultsOrder] = useState('asc');
 
     const { isPending, error, sendRequest: fetchUsers } = useFetch();
 
     useEffect(() => {
+        if (initialRender) {
+            setInitialRender(false);
+            return;
+        }
+
+        if (query === '') {
+            setData(null);
+            return;
+        }
+
         const applyData = (data) => {
             setData(data);
         };
 
-        fetchUsers('http://localhost:5000/api/users', null, applyData);
-        // return () => abortCont.abort();
-    }, [fetchUsers]);
+        fetchUsers(
+            `http://localhost:5000/api/users/search/${query}`,
+            null,
+            applyData
+        );
 
-    const queryChangeHandler = (inputQuery) => {
-        setQuery(inputQuery.toLowerCase());
+        // return () => abortCont.abort();
+    }, [fetchUsers, query, initialRender]);
+
+    const queryChangeHandler = (userInput) => {
+        setUserInput(userInput.toLowerCase());
     };
 
-    const [filteredUsers, setFilteredUsers] = useState([]);
+    // const [filteredUsers, setFilteredUsers] = useState([]);
 
-    const queryParams = new URLSearchParams(location.search);
+    // const queryParams = new URLSearchParams(location.search);
 
-    const order = queryParams.get('sort') || 'newest';
+    // const order = queryParams.get('sort') || 'asc';
 
-    useEffect(() => {
-        const updateFilteredUsers = () => {
-            if (query === '') {
-                return setFilteredUsers([]);
-            }
+    // useEffect(() => {
+    //     const updateFilteredUsers = () => {
+    //         if (query === '') {
+    //             return setFilteredUsers([]);
+    //         }
 
-            const newFilteredUsers = data.filter((user) => {
-                const checkedFields = [
-                    user.firstName.toLowerCase(),
-                    user.lastName.toLowerCase(),
-                    // user.location.city.toLowerCase(),
-                ].map((field) => field.includes(query));
+    //         const newFilteredUsers = data.filter((user) => {
+    //             const checkedFields = [
+    //                 user.firstName.toLowerCase(),
+    //                 user.lastName.toLowerCase(),
+    //                 // user.location.city.toLowerCase(),
+    //             ].map((field) => field.includes(query));
 
-                const foundUsers = checkedFields.some((field) => field);
+    //             const foundUsers = checkedFields.some((field) => field);
 
-                return foundUsers;
-            });
-            const newFilteredAndOrderdUsers = sortList(newFilteredUsers, order);
+    //             return foundUsers;
+    //         });
+    //         const newFilteredAndOrderdUsers = sortList(newFilteredUsers, order);
 
-            setFilteredUsers(newFilteredAndOrderdUsers);
-        };
+    //         setFilteredUsers(newFilteredAndOrderdUsers);
+    //     };
 
-        const identifier = setTimeout(() => {
-            updateFilteredUsers();
-        }, 500);
+    //     const identifier = setTimeout(() => {
+    //         updateFilteredUsers();
+    //     }, 500);
 
-        return () => {
-            clearTimeout(identifier);
-        };
-    }, [query, data, order]);
+    //     return () => {
+    //         clearTimeout(identifier);
+    //     };
+    // }, [query, data, order]);
 
     const changeSortingHandler = (e) => {
-        history.push({
-            pathname: location.pathname,
-            search: `?sort=${e.target.id}`,
-        });
+        setResultsOrder(e.target.id);
+    };
+
+    const submitSearchHandler = (userInput) => {
+        setQuery(userInput);
     };
 
     let userDeletedAlert = '';
@@ -96,7 +115,11 @@ const Search = () => {
         content = (
             <div className="row justify-content-center">
                 <SortGroup onClick={changeSortingHandler} />
-                <ResultsList filteredUsers={filteredUsers} query={query} />
+                <ResultsList
+                    filteredUsers={data}
+                    resultsOrder={resultsOrder}
+                    query={query}
+                />
             </div>
         );
     }
@@ -108,7 +131,11 @@ const Search = () => {
     return (
         <div className="container search-container">
             {userDeletedAlert}
-            <SearchBar query={query} onQueryChange={queryChangeHandler} />
+            <SearchBar
+                userInput={userInput}
+                onQueryChange={queryChangeHandler}
+                onSubmitHandler={submitSearchHandler}
+            />
             <div className="results-container">{content}</div>
         </div>
     );

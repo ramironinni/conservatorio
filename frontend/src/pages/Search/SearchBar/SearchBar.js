@@ -1,6 +1,7 @@
-const SearchBar = ({ query, onQueryChange }) => {
+const SearchBar = ({ userInput, onQueryChange, onSubmitHandler }) => {
     const searchSubmitHandler = (e) => {
         e.preventDefault();
+        onSubmitHandler(userInput);
     };
 
     const queryChangeHandler = (e) => {
@@ -15,7 +16,7 @@ const SearchBar = ({ query, onQueryChange }) => {
                 name="query"
                 placeholder="first name, last name or city"
                 aria-label="Search"
-                value={query}
+                value={userInput}
                 onChange={queryChangeHandler}
             />
             <button className="btn btn-primary" type="submit">
