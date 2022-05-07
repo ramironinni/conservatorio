@@ -5,8 +5,8 @@ import useFetch from '../../hooks/useFetch';
 import ErrorFetchingData from '../../components/shared/ErrorFetchingData/ErrorFetchingData';
 import AlertDismissible from '../../components/shared/Modal/AlertDismissible';
 import DetailsButtonGroup from './DetailsButtonGroup';
-import UserDetailField from './UserDetailField';
 import Pending from '../../components/shared/Pending/Pending';
+import UserInformation from './UserInformation/UserInformation';
 
 const UserDetail = () => {
     const location = useLocation();
@@ -35,7 +35,7 @@ const UserDetail = () => {
         fetchUser(url, config, applyData);
 
         return () => {};
-    }, [fetchUser, url, config]);
+    }, [fetchUser, url, config, history]);
 
     const onEditUser = () => {};
 
@@ -50,10 +50,6 @@ const UserDetail = () => {
 
     const queryParams = new URLSearchParams(location.search);
     const userCreated = queryParams.get('user-created');
-
-    console.log('location.search', location.search);
-    console.log('queryParams', queryParams);
-    console.log('userCreated', userCreated);
 
     if (userCreated) {
         userCreatedAlert = (
@@ -79,15 +75,7 @@ const UserDetail = () => {
                     alt="..."
                 />
                 <div className="container">
-                    {Object.entries(user).map((field, i) => {
-                        return (
-                            <UserDetailField
-                                fieldName={field[0]}
-                                fieldValue={field[1]}
-                                key={i}
-                            />
-                        );
-                    })}
+                    <UserInformation user={user} />
                     <DetailsButtonGroup
                         onEditUser={onEditUser}
                         onDeleteUser={onDeleteUser}

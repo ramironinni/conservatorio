@@ -41,7 +41,7 @@ const usersController = {
             return next(error);
         }
 
-        if (!users || users.length === 0) {
+        if (!users) {
             const error = new HttpError(
                 'Could not find a user for the provided query',
                 404
@@ -49,7 +49,7 @@ const usersController = {
             return next(error);
         }
 
-        res.json(users);
+        res.json({ data: { users } });
     },
     getById: async (req, res, next) => {
         let user;

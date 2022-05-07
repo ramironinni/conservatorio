@@ -19,8 +19,6 @@ const useFetch = () => {
         try {
             const response = await fetch(url, config);
 
-            // console.log(response);
-
             if (!response.ok) {
                 throw new Error(`Request failed! Status: ${response.status}`);
             }
