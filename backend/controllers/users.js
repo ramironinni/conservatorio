@@ -8,7 +8,7 @@ const usersController = {
         let users;
 
         try {
-            users = await User.find();
+            users = await User.find({}, '-password');
         } catch (err) {
             const error = new HttpError(
                 'Something went wrong, could not find all the users',
@@ -49,7 +49,11 @@ const usersController = {
             return next(error);
         }
 
-        res.json({ data: { users } });
+        res.json({
+            data: {
+                users: users.map((user) => user.toObject({ getters: true })),
+            },
+        });
     },
     getById: async (req, res, next) => {
         let user;
@@ -81,21 +85,46 @@ const usersController = {
             return next(new HttpError('Invalid inputs', 422));
         }
 
-        const { firstName, lastName } = req.body;
+        const { firstName, lastName, email, password, image, records } =
+            req.body;
+
+        let existingUser;
+
+        try {
+            existingUser = await User.findOne({ email: email });
+        } catch (err) {
+            const error = new HttpError(
+                'Signing up failed, please try again later.',
+                500
+            );
+            return next(error);
+        }
+
+        if (existingUser) {
+            const error = new HttpError(
+                'User exists already, please login instead.',
+                422
+            );
+            return next(error);
+        }
 
         let createdUser;
 
-        try {
-            const user = new User({
-                firstName,
-                lastName,
-            });
+        const user = new User({
+            firstName,
+            lastName,
+            email,
+            password,
+            image: 'https://via.placeholder.com/150',
+            records,
+        });
 
+        try {
             createdUser = await user.save();
         } catch (err) {
             const error = new HttpError(
-                'Something went wrong, could not create a new user',
-                404
+                'Signing up failed, please try again later.',
+                500
             );
             return next(error);
         }
@@ -108,7 +137,7 @@ const usersController = {
             return next(error);
         }
 
-        res.status(201).json(createdUser);
+        res.status(201).json({ user: createdUser.toObject({ getters: true }) });
     },
     deleteById: async (req, res, next) => {
         const id = req.params.id;
@@ -132,29 +161,73 @@ const usersController = {
 
         res.status(200).json({ message: 'User has been deleted' });
     },
-    updateById: (req, res, next) => {
+    updateById: async (req, res, next) => {
         const { firstName, lastName } = req.body;
         const userId = req.params.id;
 
-        // db logic
+        let user;
 
-        res.status(200).json({ user: 'the data of the updated user' });
-    },
-    login: (req, res, next) => {
         try {
-            const { email, password } = req.body;
-
-            // get from db
-            const identifiedUser = { email: 'test@test.com', password: 'test' };
-
-            if (!identifiedUser || identifiedUser.password !== password) {
-                throw new HttpError('Wrong credentials', 401);
-            }
-
-            res.json({ message: 'Logged in' });
-        } catch (error) {
-            next(error);
+            user = await User.findById(req.params.id);
+        } catch (err) {
+            const error = new HttpError(
+                'Something went wrong, could not updat the user',
+                500
+            );
+            return next(error);
         }
+
+        if (!user) {
+            const error = new HttpError(
+                'Could not find a user for the provided id',
+                404
+            );
+            return next(error);
+        }
+
+        user.firstName = firstName;
+        user.lastName = lastName;
+
+        try {
+            await user.save();
+        } catch (err) {
+            const error = new HttpError(
+                'Something went wrong, could not updat the user',
+                500
+            );
+            return next(error);
+        }
+
+        res.status(200).json({ user: user.toObject({ getters: true }) });
+
+        //
+
+        // res.status(200).json({ user: 'the data of the updated user' });
+    },
+    login: async (req, res, next) => {
+        const { email, password } = req.body;
+
+        let existingUser;
+
+        try {
+            existingUser = await User.findOne({ email: email });
+        } catch (err) {
+            const error = new HttpError(
+                'Loggin in failed, please try again later.',
+                500
+            );
+            return next(error);
+        }
+
+        if (!existingUser || existingUser.password !== password) {
+            const error = new HttpError(
+                'Invalid creadentials, could not log you in.',
+                401
+            );
+            return next(error);
+        }
+
+        return next({ message: 'Logged in' });
     },
 };
 

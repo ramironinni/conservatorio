@@ -6,6 +6,7 @@ const cors = require('cors');
 
 // require routes
 const usersRouter = require('./routes/users');
+const recordsRouter = require('./routes/records');
 const HttpError = require('./models/http-error');
 
 // instantiate express
@@ -35,6 +36,7 @@ app.use(express.json());
 
 // ROUTES
 app.use('/api/users', usersRouter);
+app.use('/api/records', recordsRouter);
 
 app.use((req, res, next) => {
     const error = new HttpError('Could not find this route', 404);
